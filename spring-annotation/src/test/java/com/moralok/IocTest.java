@@ -1,6 +1,7 @@
 package com.moralok;
 
 import com.moralok.bean.Person;
+import com.moralok.config.ComponentScanConfig;
 import com.moralok.config.PersonConfig;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -34,6 +35,15 @@ public class IocTest {
 
         String[] beanNamesForType = ac.getBeanNamesForType(Person.class);
         for (String name : beanNamesForType) {
+            System.out.println(name);
+        }
+    }
+
+    @Test
+    public void componentScanConfigTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(ComponentScanConfig.class);
+        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
+        for (String name : beanDefinitionNames) {
             System.out.println(name);
         }
     }
