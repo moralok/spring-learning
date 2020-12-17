@@ -8,6 +8,10 @@
 
 # 组件注册
 
+1. 包扫描+组件标注注解（@Controller/@Service/@Repository/@Component）。有局限性，适用于自己编写的组件
+2. @Bean【导入第三方包的组件】
+3. @Import【快速给容器中导入组件】
+
 ### @Configuration & @Bean 给容器中注册组件    
 1. 使用 @Configuration 标注一个配置类
 2. 使用 @Bean 标注一个方法：给容器中注册一个Bean，类型为返回值的类型，id默认是用方法名作为id，可以通过参数自定义id
@@ -58,4 +62,5 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
     
 2. 在方法或者类上标注@Conditional并给定对应的Condition实现类。当标注在类上，只有满足条件，类中配置的所有Bean才能生效
 
-
+### @Import-给容器中快速导入一个组件
+1. @Import(X.class)：容器就会自动注册这个组件，id默认是全类名

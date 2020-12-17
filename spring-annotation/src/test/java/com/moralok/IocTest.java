@@ -45,19 +45,13 @@ public class IocTest {
     @Test
     public void componentScanConfigTest() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(ComponentScanConfig.class);
-        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
-        for (String name : beanDefinitionNames) {
-            System.out.println(name);
-        }
+        printBeanDefinitionNames(ac);
     }
 
     @Test
     public void componentScanCustomTypeFilterTest() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(ComponentScanCustomTypeFilterConfig.class);
-        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
-        for (String name : beanDefinitionNames) {
-            System.out.println("beanDefinitionName.........." + name);
-        }
+        printBeanDefinitionNames(ac);
     }
 
     @Test
@@ -94,5 +88,18 @@ public class IocTest {
         }
         Map<String, Person> beansOfType = ac.getBeansOfType(Person.class);
         System.out.println(beansOfType);
+    }
+
+    @Test
+    public void importTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(ImportConfig.class);
+        printBeanDefinitionNames(ac);
+    }
+
+    private void printBeanDefinitionNames(ApplicationContext ac) {
+        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
+        for (String name : beanDefinitionNames) {
+            System.out.println("beanDefinitionName.........." + name);
+        }
     }
 }
