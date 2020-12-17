@@ -45,3 +45,17 @@
 单实例Bean：默认在容器启动的时候创建对象
 懒加载：容器启动的时候不创建对象，第一次(获取)使用Bean创建对象
 
+### @Conditional-按照条件注册Bean
+SpringBoot中大量用到，按照一定的条件进行判断，满足条件给容器中注册Bean。步骤如下：
+1. 自定义Condition接口的实现类并实现matches方法。matches方法有两个参数：
+    - ConditionContext：判断条件是否满足的上下文环境
+        1. 能获取到ioc使用的BeanFactory
+        2. 能获取到类加载器
+        3. 能获取到当前环境信息，如系统名称
+        4. 能获取到Bean定义的注册中心
+        5. 能获取到资源加载器
+    - AnnotatedTypeMetadata：注解信息
+    
+2. 在方法或者类上标注@Conditional并给定对应的Condition实现类。当标注在类上，只有满足条件，类中配置的所有Bean才能生效
+
+

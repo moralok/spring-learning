@@ -7,6 +7,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
+
+import java.util.Map;
 
 /**
  * @author moralok
@@ -76,5 +79,20 @@ public class IocTest {
         ApplicationContext ac = new AnnotationConfigApplicationContext(LazyConfig.class);
         System.out.println("容器创建完成");
         ac.getBean("zhangsan");
+    }
+
+    @Test
+    public void conditionalTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(ConditionalConfig.class);
+        Environment environment = ac.getEnvironment();
+        // 动态获取环境变量的值
+        String property = environment.getProperty("os.name");
+        System.out.println("os.name..."+property);
+        String[] names = ac.getBeanNamesForType(Person.class);
+        for (String name : names) {
+            System.out.println("Name.........." + name);
+        }
+        Map<String, Person> beansOfType = ac.getBeansOfType(Person.class);
+        System.out.println(beansOfType);
     }
 }
