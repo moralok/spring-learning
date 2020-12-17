@@ -18,4 +18,17 @@
 3. includeFilters 指定扫描的时候按什么规则包含组件 @Filter[]，必须禁用默认的规则(useDefaultFilters = false)
 4. @Repeatable
 5. @Filter 可指定规则类型
+    - ANNOTATION：按照注解
+    - ASSIGNABLE_TYPE：按照给定的类型
+    - ASPECTJ：使用AspectJ表达式，不太常用
+    - REGEX：使用正则表达式
+    - CUSTOM：使用自定义规则
+        1. 实现 TypeFilter 接口和对应的match方法，即使没有标注@Controller之类的注解，若满足match方法，也会被注册到容器中，比如MyTypeFilter自身
+        2. match方法有两个参数
+            - MetadataReader：读取到的当前正在扫描的类的信息，有以下3种
+                1. AnnotationMetadata
+                2. ClassMetadata
+                3. Resource
+            - MetadataReaderFactory：可以获取其他任何类的MetadataReader
+            
 
