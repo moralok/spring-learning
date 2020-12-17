@@ -1,10 +1,7 @@
 package com.moralok;
 
 import com.moralok.bean.Person;
-import com.moralok.config.ComponentScanConfig;
-import com.moralok.config.ComponentScanCustomTypeFilterConfig;
-import com.moralok.config.PersonConfig;
-import com.moralok.config.ScopeTestConfig;
+import com.moralok.config.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -32,7 +29,7 @@ public class IocTest {
      */
     @Test
     public void annotationConfigTest() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(PersonConfig.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(BeanConfig.class);
         Person lisi = (Person) ac.getBean("lisi");
         System.out.println(lisi);
 
@@ -62,7 +59,7 @@ public class IocTest {
 
     @Test
     public void scopeTest() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(ScopeTestConfig.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(ScopeConfig.class);
         System.out.println("容器创建完成");
         Object zhangsan1 = ac.getBean("zhangsan");
         Object zhangsan2 = ac.getBean("zhangsan");
@@ -72,5 +69,12 @@ public class IocTest {
         Object lisi2 = ac.getBean("lisi");
         System.out.println("多实例Bean重复获取相等吗？"+(lisi1 == lisi2));
         Assert.assertNotEquals(lisi1, lisi2);
+    }
+
+    @Test
+    public void lazyTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(LazyConfig.class);
+        System.out.println("容器创建完成");
+        ac.getBean("zhangsan");
     }
 }

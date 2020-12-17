@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
  * @since 2020/12/17 5:22 下午
  */
 @Configuration
-public class ScopeTestConfig {
+public class ScopeConfig {
 
     @Bean
     public Person zhangsan() {

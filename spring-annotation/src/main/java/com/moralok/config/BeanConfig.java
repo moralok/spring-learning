@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2020/12/16 5:53 下午
  */
 @Configuration
-public class PersonConfig {
+public class BeanConfig {
 
     /**
      * 给容器中注册一个Bean
