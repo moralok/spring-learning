@@ -31,4 +31,13 @@
                 3. Resource
             - MetadataReaderFactory：可以获取其他任何类的MetadataReader
             
+### @Scope-设置组件作用域
+1. 类型
+    - 多实例：org.springframework.beans.factory.config.ConfigurableBeanFactory#SCOPE_PROTOTYPE
+    - 单实例：org.springframework.beans.factory.config.ConfigurableBeanFactory#SCOPE_SINGLETON
+    - Web环境，同一次请求创建一个实例：org.springframework.web.context.WebApplicationContext#SCOPE_REQUEST
+    - Web环境，同一个session创建一个实例：org.springframework.web.context.WebApplicationContext#SCOPE_SESSION
+2. 创建时机
+    - 单实例：容器启动的时候
+    - 多实例：每次使用组件的时候
 
