@@ -1,5 +1,6 @@
 package com.moralok;
 
+import com.moralok.bean.Blue;
 import com.moralok.bean.Person;
 import com.moralok.config.*;
 import org.junit.Assert;
@@ -94,6 +95,8 @@ public class IocTest {
     public void importTest() {
         ApplicationContext ac = new AnnotationConfigApplicationContext(ImportConfig.class);
         printBeanDefinitionNames(ac);
+        Blue blue = ac.getBean(Blue.class);
+        System.out.println(blue);
     }
 
     private void printBeanDefinitionNames(ApplicationContext ac) {

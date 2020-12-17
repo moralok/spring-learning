@@ -62,5 +62,8 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
     
 2. 在方法或者类上标注@Conditional并给定对应的Condition实现类。当标注在类上，只有满足条件，类中配置的所有Bean才能生效
 
-### @Import-给容器中快速导入一个组件
+### @Import-给容器中快速导入组件
 1. @Import(X.class)：容器就会自动注册这个组件，id默认是全类名
+2. ImportSelector：返回需要导入的组件的全类名
+    - 实现 ImportSelector 接口并实现 selectImports 方法
+    - 方法返回需要导入的组件的全类名
