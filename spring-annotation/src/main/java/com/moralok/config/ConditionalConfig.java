@@ -1,9 +1,9 @@
 package com.moralok.config;
 
 import com.moralok.bean.Person;
-import com.moralok.condition.LinuxCondition;
-import com.moralok.condition.MacCondition;
-import com.moralok.condition.WindowsCondition;
+import com.moralok.config.support.condition.LinuxCondition;
+import com.moralok.config.support.condition.MacCondition;
+import com.moralok.config.support.condition.WindowsCondition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;

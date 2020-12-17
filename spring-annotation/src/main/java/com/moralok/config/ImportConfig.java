@@ -3,7 +3,7 @@ package com.moralok.config;
 import com.moralok.bean.Color;
 import com.moralok.bean.Red;
 import com.moralok.config.support.MyImportBeanDefinitionRegistrar;
-import com.moralok.selector.MyImportSelector;
+import com.moralok.config.support.MyImportSelector;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

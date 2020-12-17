@@ -1,4 +1,4 @@
-package com.moralok.condition;
+package com.moralok.config.support.condition;
 
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

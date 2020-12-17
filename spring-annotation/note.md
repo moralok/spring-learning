@@ -11,6 +11,7 @@
 1. 包扫描+组件标注注解（@Controller/@Service/@Repository/@Component）。有局限性，适用于自己编写的组件
 2. @Bean【导入第三方包的组件】
 3. @Import【快速给容器中导入组件】
+4. 使用Spring提供的FactoryBean（工厂Bean）
 
 ### @Configuration & @Bean 给容器中注册组件    
 1. 使用 @Configuration 标注一个配置类
@@ -67,3 +68,7 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
 2. ImportSelector：返回需要导入的组件的全类名
     - 实现 ImportSelector 接口并实现 selectImports 方法
     - 方法返回需要导入的组件的全类名
+
+### 使用FactoryBean注册组件
+1. 默认获取到的是工厂Bean调用getObject创建的对象
+2. 要获取工厂Bean本身，需要给id前面加一个&

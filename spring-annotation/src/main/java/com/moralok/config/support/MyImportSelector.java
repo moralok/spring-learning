@@ -1,4 +1,4 @@
-package com.moralok.selector;
+package com.moralok.config.support;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;

@@ -99,6 +99,23 @@ public class IocTest {
         System.out.println(blue);
     }
 
+    @Test
+    public void factoryBeanTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(FactoryBeanConfig.class);
+        printBeanDefinitionNames(ac);
+        Object colorFactoryBean1 = ac.getBean("colorFactoryBean");
+        if (colorFactoryBean1 != null) {
+            System.out.println(colorFactoryBean1.getClass());
+        }
+        Object colorFactoryBean2 = ac.getBean("colorFactoryBean");
+        Assert.assertNotEquals(colorFactoryBean1, colorFactoryBean2);
+        Object colorFactoryBeanItself = ac.getBean("&colorFactoryBean");
+        if (colorFactoryBeanItself != null) {
+            System.out.println(colorFactoryBeanItself.getClass());
+        }
+
+    }
+
     private void printBeanDefinitionNames(ApplicationContext ac) {
         String[] beanDefinitionNames = ac.getBeanDefinitionNames();
         for (String name : beanDefinitionNames) {
