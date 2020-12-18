@@ -154,3 +154,19 @@ JSR250规范的注解
 2. @PropertySource：指定文件、指定编码
     - 可以重复注解或者String[]指定多个配置文件
 3. 通过 Environment 验证，相关的k/v存到了环境变量中
+
+
+# 自动装配
+
+### @Autowired & @Qualified & @Primary
+
+Spring利用依赖注入（DI），完成对IOC容器中各个组件的依赖关系赋值。
+
+1. @Autowired：自动注入
+    - 默认优先按照类型去容器里找对应的组件，类似于 ac.getBean(BookService.class);
+    - 如果找到多个相同类型的组件，再将属性的名称作为组件的id去查找
+    - 使用 @Qualifier("manualBookDao")，指定注入的组件id
+    - 自动装配默认一定要将属性赋值好，否则报错；可以指定 required = false
+    - 使用 @Primary，让Spring进行自动装配的时候，默认使用首选的Bean。可以继续用@Qualifier指定目标。
+
+    

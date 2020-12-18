@@ -14,7 +14,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 public class PropertyValueTest {
 
     @Test
-    public void test() {
+    public void readTest() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PropertyValueConfig.class);
         printBeanDefinitionNames(ac);
 
