@@ -1,6 +1,7 @@
 package com.moralok.config;
 
 import com.moralok.dao.BookDao;
+import com.moralok.dao.ResourceBookDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +21,13 @@ public class AutowiredConfig {
         BookDao bookDao = new BookDao();
         bookDao.setLabel(2);
         return bookDao;
+    }
+
+    @Bean
+    @Primary
+    public ResourceBookDao manualResourceBookDao() {
+        ResourceBookDao resourceBookDao = new ResourceBookDao();
+        resourceBookDao.setLabel(2);
+        return resourceBookDao;
     }
 }

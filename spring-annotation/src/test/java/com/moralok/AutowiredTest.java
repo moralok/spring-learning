@@ -2,7 +2,9 @@ package com.moralok;
 
 import com.moralok.config.AutowiredConfig;
 import com.moralok.dao.BookDao;
+import com.moralok.dao.ResourceBookDao;
 import com.moralok.service.BookService;
+import com.moralok.service.ResourceBookService;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -19,5 +21,12 @@ public class AutowiredTest {
         System.out.println(bookService);
         BookDao bookDao = (BookDao) ac.getBean("bookDao");
         System.out.println(bookDao);
+    }
+
+    @Test
+    public void resourceTest() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutowiredConfig.class);
+        ResourceBookService resourceBookService = ac.getBean(ResourceBookService.class);
+        System.out.println(resourceBookService);
     }
 }

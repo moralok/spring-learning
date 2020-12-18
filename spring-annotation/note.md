@@ -158,15 +158,22 @@ JSR250规范的注解
 
 # 自动装配
 
-### @Autowired & @Qualified & @Primary
+### @Autowired & @Qualified & @Primary【Spring定义】
 
-Spring利用依赖注入（DI），完成对IOC容器中各个组件的依赖关系赋值。
+Spring利用依赖注入（DI），完成对IOC容器中各个组件的依赖关系赋值。@Autowired 自动注入：
 
-1. @Autowired：自动注入
-    - 默认优先按照类型去容器里找对应的组件，类似于 ac.getBean(BookService.class);
-    - 如果找到多个相同类型的组件，再将属性的名称作为组件的id去查找
-    - 使用 @Qualifier("manualBookDao")，指定注入的组件id
-    - 自动装配默认一定要将属性赋值好，否则报错；可以指定 required = false
-    - 使用 @Primary，让Spring进行自动装配的时候，默认使用首选的Bean。可以继续用@Qualifier指定目标。
+- 默认优先按照类型去容器里找对应的组件，类似于 ac.getBean(BookService.class);
+- 如果找到多个相同类型的组件，再将属性的名称作为组件的id去查找
+- 使用 @Qualifier("manualBookDao")，指定注入的组件id
+- 自动装配默认一定要将属性赋值好，否则报错；可以指定 required = false
+- 使用 @Primary，让Spring进行自动装配的时候，默认使用首选的Bean。可以继续用@Qualifier指定目标。
 
-    
+### @Resource(JSR250) & @Inject(JSR330)【Java规范的注解】
+
+1. @Resource
+    - 可以和@Autowired一样实现自动装配的功能，默认是按照组件名称装配的
+    - 没有能支持@Primary功能
+    - 没有能支持 required = false
+2. @Inject
+    - 需要导入javax.inject的包，和@Autowired的功能一样，支持@Primary
+    - 没有能支持 required = false
