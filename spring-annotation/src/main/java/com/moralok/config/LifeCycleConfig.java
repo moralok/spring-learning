@@ -1,6 +1,7 @@
 package com.moralok.config;
 
 import com.moralok.bean.Car;
+import com.moralok.bean.Cat;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,5 +15,10 @@ public class LifeCycleConfig {
     @Bean(initMethod = "init", destroyMethod = "destroy")
     public Car car() {
         return new Car();
+    }
+
+    @Bean
+    public Cat cat() {
+        return new Cat();
     }
 }

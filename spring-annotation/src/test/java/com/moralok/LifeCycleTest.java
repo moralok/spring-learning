@@ -16,6 +16,7 @@ public class LifeCycleTest {
         // 1、创建容器
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
         System.out.println("容器创建完成");
+        // 2、关闭容器
         ac.close();
     }
 }
