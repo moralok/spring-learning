@@ -85,6 +85,7 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
 4. BeanPostProcessor：Bean的后置处理器：在Bean初始化前后进行一些工作
     - postProcessBeforeInitialization：在初始化（即1-3中自定义init-method或者afterPropertiesSet）之前调用
     - postProcessAfterInitialization：在初始化（即1-3中自定义init-method或者afterPropertiesSet）之后调用
+    - 原理
 
 ### @Bean 指定初始化和销毁方法
 
@@ -119,3 +120,11 @@ JSR250规范的注解
 
 - 从日志上看，该接口的两个方法包围了init方法
 - 所有的Bean都会执行，即使没有init方法
+
+### BeanPostProcessor 原理
+
+- populateBean(beanName, mbd, instanceWrapper); 【给Bean进行属性赋值。】
+- initializeBean(beanName, exposedObject, mbd); 【初始化Bean】
+    - applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName); 【遍历得到的容器中所有的BeanPostProcessor，挨个执行；一旦返回null，跳出For循环，不会执行后续的BeanPostProcessor】
+    - invokeInitMethods(beanName, wrappedBean, mbd); 【执行init方法】
+    - applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
