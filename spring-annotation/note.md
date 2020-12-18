@@ -147,3 +147,10 @@ JSR250规范的注解
 1. 基本数值
 2. 可以写SpEL：#{}
 3. 可以写${}：取出配置文件中的值（严格上说，就是运行环境变量里面的值）
+
+### @PropertySource 加载外部配置文件
+
+1. XML：<context:property-placeholder location="player.properties"/> 加载配置文件
+2. @PropertySource：指定文件、指定编码
+    - 可以重复注解或者String[]指定多个配置文件
+3. 通过 Environment 验证，相关的k/v存到了环境变量中

@@ -1,21 +1,29 @@
 package com.moralok.bean;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * @author moralok
- * @since 2020/12/16 5:40 下午
+ * @since 2020/12/18 2:51 下午
  */
-public class Person {
+public class Player {
 
+    @Value("liudehua")
     private String name;
 
+    @Value("#{20-2}")
     private Integer age;
 
-    public Person() {
+    @Value("${player.nickname}")
+    private String nickname;
+
+    public Player() {
     }
 
-    public Person(String name, Integer age) {
+    public Player(String name, Integer age, String nickname) {
         this.name = name;
         this.age = age;
+        this.nickname = nickname;
     }
 
     public String getName() {
@@ -34,11 +42,20 @@ public class Person {
         this.age = age;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
-        return "Person{" +
+        return "Player{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", nickname='" + nickname + '\'' +
                 '}';
     }
 }

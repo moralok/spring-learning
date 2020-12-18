@@ -1,10 +1,11 @@
 package com.moralok;
 
-import com.moralok.bean.Person;
+import com.moralok.bean.Player;
 import com.moralok.config.PropertyValueConfig;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * @author moralok
@@ -17,8 +18,13 @@ public class PropertyValueTest {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PropertyValueConfig.class);
         printBeanDefinitionNames(ac);
 
-        Person person = (Person) ac.getBean("person");
-        System.out.println(person);
+        Player player = (Player) ac.getBean("player");
+        System.out.println(player);
+
+        ConfigurableEnvironment environment = ac.getEnvironment();
+        String property = environment.getProperty("player.nickname");
+        System.out.println(property);
+
         ac.close();
     }
 
