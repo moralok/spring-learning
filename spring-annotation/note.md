@@ -86,6 +86,7 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
     - postProcessBeforeInitialization：在初始化（即1-3中自定义init-method或者afterPropertiesSet）之前调用
     - postProcessAfterInitialization：在初始化（即1-3中自定义init-method或者afterPropertiesSet）之后调用
     - 原理
+    - 在Spring底层的应用（通过打断点找到查看对应的BeanPostProcessor）
 
 ### @Bean 指定初始化和销毁方法
 
@@ -128,3 +129,11 @@ JSR250规范的注解
     - applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName); 【遍历得到的容器中所有的BeanPostProcessor，挨个执行；一旦返回null，跳出For循环，不会执行后续的BeanPostProcessor】
     - invokeInitMethods(beanName, wrappedBean, mbd); 【执行init方法】
     - applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+
+### BeanPostProcessor 在Spring底层的应用
+
+1. ApplicationContextAwareProcessor：postProcessBeforeInitialization检查创建的Bean是否实现了Aware接口，根据Aware接口类型调用方法
+2. InitDestroyAnnotationBeanPostProcessor：处理生命周期注解，检查@PostConstruct和@PreDestroy注解并执行相应的方法
+3. AutowiredAnnotationBeanPostProcessor：处理 @Autowired
+4. AsyncAnnotationBeanPostProcessor：处理 @Async
+
