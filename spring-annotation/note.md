@@ -137,3 +137,13 @@ JSR250规范的注解
 3. AutowiredAnnotationBeanPostProcessor：处理 @Autowired
 4. AsyncAnnotationBeanPostProcessor：处理 @Async
 
+
+# 属性赋值
+
+### @Value 赋值
+
+使用 @Value 赋值，等同于XML中的value标签，后者能写什么，前者也能写什么。
+
+1. 基本数值
+2. 可以写SpEL：#{}
+3. 可以写${}：取出配置文件中的值（严格上说，就是运行环境变量里面的值）

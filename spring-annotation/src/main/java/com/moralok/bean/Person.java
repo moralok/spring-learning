@@ -1,13 +1,17 @@
 package com.moralok.bean;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * @author moralok
  * @since 2020/12/16 5:40 下午
  */
 public class Person {
 
+    @Value("liudehua")
     private String name;
 
+    @Value("#{20-2}")
     private Integer age;
 
     public Person() {
