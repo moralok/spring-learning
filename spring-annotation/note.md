@@ -188,3 +188,20 @@ Spring利用依赖注入（DI），完成对IOC容器中各个组件的依赖关
 4. @Bean标注在方法上：方法参数从容器中获取，默认不写@Autowired
 
 默认加载IOC容器中的组件，容器启动会调用无参构造器创建对象，再进行初始化赋值等操作。
+
+### Aware注入Spring底层组件 & 原理
+
+自定义组件想要使用Spring容器底层的一些组件（ApplicationContext、BeanFactory等）。
+需要实现xxxAware接口，容器在创建对象时，会调用接口的方法注入相关组件。
+xxxAware功能是通过xxxBeanPostProcessor实现的。
+
+- ApplicationContextAware
+- BeanNameAware
+- EmbeddedValueResolverAware
+
+打断点体会 ApplicationContextAwareProcessor
+
+1. 判断什么接口的实现类：instanceof
+2. 调用对应接口的方法：invokeAwareInterfaces(bean);
+
+

@@ -1,5 +1,6 @@
 package com.moralok.config;
 
+import com.moralok.bean.AwareBean;
 import com.moralok.bean.Car;
 import com.moralok.bean.Manager;
 import com.moralok.dao.BookDao;
@@ -44,5 +45,10 @@ public class AutowiredConfig {
         Manager manager = new Manager();
         manager.setCar(car);
         return manager;
+    }
+
+    @Bean
+    public AwareBean awareBean() {
+        return new AwareBean();
     }
 }

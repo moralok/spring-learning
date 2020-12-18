@@ -5,7 +5,6 @@ import com.moralok.bean.Car;
 import com.moralok.bean.Manager;
 import com.moralok.config.AutowiredConfig;
 import com.moralok.dao.BookDao;
-import com.moralok.dao.ResourceBookDao;
 import com.moralok.service.BookService;
 import com.moralok.service.ResourceBookService;
 import org.junit.Test;
@@ -50,6 +49,12 @@ public class AutowiredTest {
         System.out.println(manager);
         Car car = ac.getBean(Car.class);
         System.out.println(car);
+        ac.close();
+    }
+
+    @Test
+    public void awareTest() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutowiredConfig.class);
         ac.close();
     }
 }
