@@ -82,7 +82,9 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
 3. 使用JSR250：
     - @PostConstruct：在Bean创建完成并属性赋值完成，执行初始化方法
     - @PreDestroy：在容器销毁Bean之前执行销毁方法
-
+4. BeanPostProcessor：Bean的后置处理器：在Bean初始化前后进行一些工作
+    - postProcessBeforeInitialization：在初始化（即1-3中自定义init-method或者afterPropertiesSet）之前调用
+    - postProcessAfterInitialization：在初始化（即1-3中自定义init-method或者afterPropertiesSet）之后调用
 
 ### @Bean 指定初始化和销毁方法
 
@@ -112,3 +114,8 @@ Bean创建——初始化——销毁
 ### @PostConstruct & @PreDestroy
 
 JSR250规范的注解
+
+### BeanPostProcessor-后置处理器
+
+- 从日志上看，该接口的两个方法包围了init方法
+- 所有的Bean都会执行，即使没有init方法

@@ -4,6 +4,7 @@ import com.moralok.bean.Car;
 import com.moralok.bean.Cat;
 import com.moralok.bean.Dog;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2020/12/18 10:29 上午
  */
 @Configuration
+@ComponentScan(value = "com.moralok.component")
 public class LifeCycleConfig {
 
     @Bean(initMethod = "init", destroyMethod = "destroy")
