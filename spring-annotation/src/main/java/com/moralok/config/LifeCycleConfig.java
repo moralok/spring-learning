@@ -2,6 +2,7 @@ package com.moralok.config;
 
 import com.moralok.bean.Car;
 import com.moralok.bean.Cat;
+import com.moralok.bean.Dog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,5 +21,10 @@ public class LifeCycleConfig {
     @Bean
     public Cat cat() {
         return new Cat();
+    }
+
+    @Bean
+    public Dog dog() {
+        return new Dog();
     }
 }

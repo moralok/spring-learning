@@ -79,6 +79,9 @@ SpringBoot中大量用到，按照一定的条件进行判断，满足条件给�
 2. 通过让 Bean 实现接口
     - InitializingBean（定义初始化逻辑）
     - DisposableBean（定义销毁逻辑）
+3. 使用JSR250：
+    - @PostConstruct：在Bean创建完成并属性赋值完成，执行初始化方法
+    - @PreDestroy：在容器销毁Bean之前执行销毁方法
 
 
 ### @Bean 指定初始化和销毁方法
@@ -106,3 +109,6 @@ Bean创建——初始化——销毁
 
 分别实现 afterPropertiesSet 和 destroy方法
 
+### @PostConstruct & @PreDestroy
+
+JSR250规范的注解
