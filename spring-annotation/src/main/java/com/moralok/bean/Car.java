@@ -1,9 +1,12 @@
 package com.moralok.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author moralok
  * @since 2020/12/18 10:26 上午
  */
+@Component
 public class Car {
 
     public Car() {
