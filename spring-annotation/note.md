@@ -204,4 +204,9 @@ xxxAware功能是通过xxxBeanPostProcessor实现的。
 1. 判断什么接口的实现类：instanceof
 2. 调用对应接口的方法：invokeAwareInterfaces(bean);
 
+### @Profile 环境搭建
 
+Spring为我们提供的可以根据当前环境，动态地激活和切换一系列组件的功能。
+
+- 开发环境、测试环境、生产环境
+- 数据源
