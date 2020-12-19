@@ -259,3 +259,23 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
 7. 开启基于注解的切面功能
     - XML使用名称空间 `<aop:aspectj-autoproxy/>`
     - 配置类标注 @EnableAspectJAutoProxy（Spring有很多类似的注解）
+    
+### 分析 @EnableAspectJAutoProxy
+
+1. @Import(AspectJAutoProxyRegistrar.class)，AspectJAutoProxyRegistrar是什么？
+2. AspectJAutoProxyRegistrar 实现了 ImportBeanDefinitionRegistrar 接口，自定义在容器中注册Bean。注册了什么Bean呢？
+    1. AopConfigUtils.registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry);【注解感知的AspectJ自动代理创建器】
+        - registerOrEscalateApcAsRequired(AnnotationAwareAspectJAutoProxyCreator.class, registry, source);
+            - 判断容器中是否有：org.springframework.aop.config.internalAutoProxyCreator = AnnotationAwareAspectJAutoProxyCreator，
+            - 如果没有就注册到容器中。【Spring很多功能可以通过看——给容器中注册了什么组件，这个组件什么时候工作，功能是什么，从而了解原理。】
+    2. AnnotationConfigUtils.attributesFor(importingClassMetadata, EnableAspectJAutoProxy.class); 获取注解的信息：
+        - 查看属性 proxyTargetClass
+        - 查看属性 exposeProxy
+3. AnnotationAwareAspectJAutoProxyCreator
+    - 继承关系：
+        AnnotationAwareAspectJAutoProxyCreator 
+            extends->AspectJAwareAdvisorAutoProxyCreator 
+                extends->AbstractAdvisorAutoProxyCreator 
+                    extends->AbstractAutoProxyCreator 
+                        implement->SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware 
+    - 关注后置处理器（在Bean初始化前后做的事情）、自动装配BeanFactory                
