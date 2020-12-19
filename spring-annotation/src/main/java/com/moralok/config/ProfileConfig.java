@@ -60,6 +60,7 @@ public class ProfileConfig implements EmbeddedValueResolverAware {
         return dataSource;
     }
 
+    @Override
     public void setEmbeddedValueResolver(StringValueResolver resolver) {
         this.resolver = resolver;
         driverClass = resolver.resolveStringValue("${db.driver}");

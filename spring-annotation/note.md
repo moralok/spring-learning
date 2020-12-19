@@ -227,3 +227,35 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
     - 设置一个需要激活的环境
     - 注册配置类
     - 启动刷新容器
+
+
+# AOP
+
+### AOP 功能测试
+
+定义：指在程序运行期间动态地将某段代码切入到指定方法指定位置进行运行地编程方式
+
+原理：动态代理
+
+步骤：
+
+1. 导入AOP模块：Spring AOP（spring-aspects）
+2. 定义业务逻辑类（MathCalculator）；要求在业务逻辑运行的时候将日志进行打印（方法之前、方法运行结束、方法出现异常）
+3. 定义一个日志切面类（LogAspects）；要求类里面的方法能动态感知MathCalculator.div运行到哪里，然后执行
+    - 通知方法
+        1. 前置通知(@Before)：logStart-运行之前
+        2. 后置通知(@After)：logEnd-运行之后，无论正常还是异常
+        3. 返回通知(@AfterReturning)：logReturn-返回之后
+        4. 异常通知(@AfterThrowing)：logException-异常之后
+        5. 环绕通知(@Around)：动态代理，手动推进方法执行（joinPoint.proceed()）
+    - 可以注入方法参数
+        1. JoinPoint，如果有，一定要是第一个参数
+        2. returning
+        3. throwing
+4. 给切面类的目标方法标注何时何地运行（通知注解）
+    - 切入点表达式
+5. 将切面类和业务逻辑类都加入容器中
+6. @Aspect 告诉Spring当前类是一个切面类
+7. 开启基于注解的切面功能
+    - XML使用名称空间 `<aop:aspectj-autoproxy/>`
+    - 配置类标注 @EnableAspectJAutoProxy（Spring有很多类似的注解）
