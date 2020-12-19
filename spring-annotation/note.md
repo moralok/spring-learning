@@ -278,8 +278,7 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
                 extends->AbstractAdvisorAutoProxyCreator 
                     extends->AbstractAutoProxyCreator 
                         implement->SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware 
-    - 关注后置处理器（在Bean初始化前后做的事情）、自动装配BeanFactory 
-        - 手动分析代码哪里需要打断电               
+    - 关注后置处理器（在Bean初始化前后做的事情）、自动装配BeanFactory，手动分析代码哪里需要打断电               
         - AbstractAutoProxyCreator
             - setBeanFactory
             - postProcessBeforeInstantiation
@@ -288,3 +287,31 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
             - setBeanFactory -> initBeanFactory
         - AnnotationAwareAspectJAutoProxyCreator
             - initBeanFactory(重写)
+    - 流程
+        1. 传入配置类，创建ioc容器
+        2. 注册配置类，调用refresh，刷新容器
+        3. registerBeanPostProcessors(beanFactory); 注册Bean后置处理器，方便拦截Bean的创建。
+            1. 先获取IOC容器已经定义了的需要创建对象的所有BeanPostProcessor
+                - String[] postProcessorNames = beanFactory.getBeanNamesForType(BeanPostProcessor.class, true, false);
+                - 【AspectJAutoProxyRegistrar注册了AnnotationAwareAspectJAutoProxyCreator，还有其它默认的】
+            2. 给容器添加别的BeanPostProcessor
+                - beanFactory.addBeanPostProcessor(new BeanPostProcessorChecker(beanFactory, beanProcessorTargetCount));
+            3. 按优先级【PriorityOrdered、Ordered】和内部对BeanPostProcessor进行分类并注册
+                - 优先注册 PriorityOrdered
+                - 再注册 Ordered
+                - 再注册 普通的
+            4. 注册，实际上就是创建BeanPostProcessor，并保存在容器中【AnnotationAwareAspectJAutoProxyCreator 为例】
+                - BeanPostProcessor pp = beanFactory.getBean(ppName, BeanPostProcessor.class);
+                - doGetBean(name, requiredType, null, false);
+                - getSingleton(beanName, new ObjectFactory<Object>(){})
+                - singletonObject = singletonFactory.getObject();
+                    1. 创建Bean的实例
+                    2. populateBean：给Bean的属性赋值
+                    3. initializeBean：初始化Bean
+                        1. invokeAwareMethods(beanName, bean); 处理Aware接口的方法回调
+                            - setBeanFactory -> initBeanFactory【aspectJAdvisorFactory、aspectJAdvisorsBuilder】
+                        2. wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+                        3. invokeInitMethods(beanName, wrappedBean, mbd);
+                        4. applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
+                        5. internalAutoProxyCreator=AnnotationAwareAspectJAutoProxyCreator创建完成
+            5. 把BeanPostProcessor注册到BeanFactory中           
