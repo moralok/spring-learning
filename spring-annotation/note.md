@@ -331,3 +331,25 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
                             - bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName); 
                             - 拿到所有后置处理器，如果是InstantiationAwareBeanPostProcessor，就执行postProcessBeforeInstantiation【实例化前】
                     2. doCreateBean(beanName, mbdToUse, args); 真正地创建一个Bean实例【同3.4过程】
+    - 作用
+        1. 判断当前Bean是否在advisedBeans中（保存了所有需要增强的Bean）
+        2. 判断当前Bean是否是基础类型的Advice、Pointcut、Advisor、AopInfrastructureBean或者标注@Aspect（isAspect）【切面】
+        3. shouldSkip 是否需要跳过
+            1. 获取候选的增强器（切面的通知方法）【List<Advisor> candidateAdvisors】
+                - 我们每一个封装的通知方法的增强器是InstantiationModelAwarePointcutAdvisor
+                - 如果是AspectJPointcutAdvisor则跳过
+            2. 创建对象
+                - postProcessAfterInitialization->return wrapIfNecessary(bean, beanName, cacheKey);
+                    1. 获取能在当前Bean使用的增强器 【Object[] specificInterceptors】
+                        1. 获取候选的所有增强器（通知方法），找到哪些通知方法需要切入当前Bean方法
+                        2. 获取能在当前Bean使用的增强器
+                        3. 给增强器排序
+                    2. 保存当前Bean到advisedBeans
+                    3. 如果需要增强，则创建代理对象
+                        1. 获取所有的增强器（通知方法）
+                        2. 保存到proxyFactory
+                        3. 创建代理对象【Spring自动决定】
+                            - JdkDynamicAopProxy(config);【jdk动态代理】
+                            - ObjenesisCglibAopProxy(config);【cglib动态代理】
+                    4. 给容器中返回当前组件使用cglib增强的代理对象
+                    5. 以后容器中获取到的就是这个组件的代理对象，执行目标方法的时候，代理对象就会执行通知方法的流程
