@@ -278,4 +278,13 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
                 extends->AbstractAdvisorAutoProxyCreator 
                     extends->AbstractAutoProxyCreator 
                         implement->SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware 
-    - 关注后置处理器（在Bean初始化前后做的事情）、自动装配BeanFactory                
+    - 关注后置处理器（在Bean初始化前后做的事情）、自动装配BeanFactory 
+        - 手动分析代码哪里需要打断电               
+        - AbstractAutoProxyCreator
+            - setBeanFactory
+            - postProcessBeforeInstantiation
+            - postProcessAfterInitialization
+        - AbstractAdvisorAutoProxyCreator
+            - setBeanFactory -> initBeanFactory
+        - AnnotationAwareAspectJAutoProxyCreator
+            - initBeanFactory(重写)
