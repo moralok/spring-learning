@@ -315,3 +315,19 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
                         4. applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
                         5. internalAutoProxyCreator=AnnotationAwareAspectJAutoProxyCreator创建完成
             5. 把BeanPostProcessor注册到BeanFactory中           
+        4. finishBeanFactoryInitialization(beanFactory); 完成 BeanFactory 初始化工作，创建剩下的单实例 【AnnotationAwareAspectJAutoProxyCreator执行时机，以上是创建和注册的过程】
+            1. 遍历获取容器中所有的Bean，依次创建对象
+                - getBean->doGetBean->getSingleton
+            2. 创建Bean
+                1. 先从缓存中获取Bean，如果能获取到，说明Bean已经被创建过，直接使用，否则创建，并缓存
+                2. createBean 创建Bean
+                    - 【BeanPostProcessor是在对象创建完成后，初始化前后调用】
+                    - 【InstantiationAwareBeanPostProcessor是在对象创建前先尝试执行返回对象】
+                    - 即 AnnotationAwareAspectJAutoProxyCreator 会在Bean创建前尝试返回Bean实例
+                    1. resolveBeforeInstantiation(beanName, mbdToUse); 
+                        - 希望后置处理器在此能返回一个代理对象
+                        - 如果不能就继续下一步 doCreateBean
+                        1. 后置处理器先尝试返回对象
+                            - bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName); 
+                            - 拿到所有后置处理器，如果是InstantiationAwareBeanPostProcessor，就执行postProcessBeforeInstantiation【实例化前】
+                    2. doCreateBean(beanName, mbdToUse, args); 真正地创建一个Bean实例【同3.4过程】
