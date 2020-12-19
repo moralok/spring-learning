@@ -17,6 +17,19 @@ public class ProfileTest {
         printBeanDefinitionNames(ac);
     }
 
+    @Test
+    public void setProfileTest() {
+        // 创建一个ApplicationContext
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+        // 设置一个需要激活的环境
+        ac.getEnvironment().setActiveProfiles("dev", "test");
+        // 注册配置类
+        ac.register(ProfileConfig.class);
+        // 启动刷新容器
+        ac.refresh();
+        printBeanDefinitionNames(ac);
+    }
+
     private void printBeanDefinitionNames(ApplicationContext ac) {
         String[] beanDefinitionNames = ac.getBeanDefinitionNames();
         for (String name : beanDefinitionNames) {

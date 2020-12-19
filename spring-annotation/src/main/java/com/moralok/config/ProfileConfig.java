@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.util.StringValueResolver;
 
@@ -26,6 +27,7 @@ public class ProfileConfig implements EmbeddedValueResolverAware {
 
     private String driverClass;
 
+    @Profile("dev")
     @Bean
     public DataSource dataSourceDev(@Value("${db.password}") String password) throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -36,6 +38,7 @@ public class ProfileConfig implements EmbeddedValueResolverAware {
         return dataSource;
     }
 
+    @Profile("test")
     @Bean
     public DataSource dataSourceTest(@Value("${db.password}") String password) throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
@@ -46,6 +49,7 @@ public class ProfileConfig implements EmbeddedValueResolverAware {
         return dataSource;
     }
 
+    @Profile("prod")
     @Bean
     public DataSource dataSourceProd(@Value("${db.password}") String password) throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
