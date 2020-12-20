@@ -353,30 +353,47 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
                             - ObjenesisCglibAopProxy(config);【cglib动态代理】
                     4. 给容器中返回当前组件使用cglib增强的代理对象
                     5. 以后容器中获取到的就是这个组件的代理对象，执行目标方法的时候，代理对象就会执行通知方法的流程
-        3. 目标方法执行
-            - 容器中保存了组件的代理对象（cglib增强后的对象），对象里面保存了详细信息，比如增强器、目标对象
-            1. CglibAopProxy.intercept，拦截目标方法的执行
-            2. 根据ProxyFactory获取目标方法的拦截器链【拦截器链就是每一个通知方法被包装为方法拦截器，利用MethodInterceptor机制】
-                - List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
-                - this.advisorChainFactory.getInterceptorsAndDynamicInterceptionAdvice(this, method, targetClass);
-                    1. List<Object> interceptorList = new ArrayList<Object>(config.getAdvisors().length);【长度5，1个ExposeInvocationInterceptor和4个增强器】
-                    2. 遍历所有的增强器，将其转为Interceptor
-                    3. 将增强器转为List<MethodInterceptor>
-                        - 如果是MethodInterceptor，直接加入到集合中
-                        - 如果不是，使用AdvisorAdapter将增强器转为MethodInterceptor
-                        - 转换完成返回MethodInterceptor数组
-            3. 如果没有拦截器链，直接执行目标方法
-            4. 如果有拦截器链，把需要执行的目标对象、目标方法、拦截器等信息传入一个CglibMethodInvocation对象，
-                并调用proceed方法，然后处理返回值
-            5. 拦截器链的触发过程【MethodInvocation.proceed】
-                1. 如果没有拦截器，执行目标方法【invokeJoinpoint();】；或者执行到最后一个拦截器，再【MethodInvocation.proceed】
-                    - currentInterceptorIndex 每次执行+1
-                    - ExposeInvocationInterceptor.invoke(this)->MethodInvocation.proceed
-                    - AspectJAfterThrowingAdvice.invoke(this)->MethodInvocation.proceed
-                    - AfterReturningAdviceInterceptor.invoke(this)->MethodInvocation.proceed
-                    - AspectJAfterAdvice.invoke(this)->MethodInvocation.proceed
-                    - MethodBeforeAdviceInterceptor->【前置通知】->MethodInvocation.proceed->MethodInvocation.proceed->return
-                    - AspectJAfterAdvice->invokeAdviceMethod(getJoinPointMatch(), null, null);【后置通知】
-                    - AfterReturningAdviceInterceptor->没有异常，invokeAdviceMethod【返回通知】（否则抛出异常）
-                    - AspectJAfterThrowingAdvice->catch异常，invokeAdviceMethod【异常通知】
-                2. 链式获取每一个拦截器，拦截器执行invoke方法，每一个拦截器等待下一个拦截器执行完成后再来执行。拦截器链的机制，保证通知方法与目标方法的执行顺序
+    - 目标方法执行
+        - 容器中保存了组件的代理对象（cglib增强后的对象），对象里面保存了详细信息，比如增强器、目标对象
+        1. CglibAopProxy.intercept，拦截目标方法的执行
+        2. 根据ProxyFactory获取目标方法的拦截器链【拦截器链就是每一个通知方法被包装为方法拦截器，利用MethodInterceptor机制】
+            - List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
+            - this.advisorChainFactory.getInterceptorsAndDynamicInterceptionAdvice(this, method, targetClass);
+                1. List<Object> interceptorList = new ArrayList<Object>(config.getAdvisors().length);【长度5，1个ExposeInvocationInterceptor和4个增强器】
+                2. 遍历所有的增强器，将其转为Interceptor
+                3. 将增强器转为List<MethodInterceptor>
+                    - 如果是MethodInterceptor，直接加入到集合中
+                    - 如果不是，使用AdvisorAdapter将增强器转为MethodInterceptor
+                    - 转换完成返回MethodInterceptor数组
+        3. 如果没有拦截器链，直接执行目标方法
+        4. 如果有拦截器链，把需要执行的目标对象、目标方法、拦截器等信息传入一个CglibMethodInvocation对象，
+            并调用proceed方法，然后处理返回值
+        5. 拦截器链的触发过程【MethodInvocation.proceed】
+            1. 如果没有拦截器，执行目标方法【invokeJoinpoint();】；或者执行到最后一个拦截器，再【MethodInvocation.proceed】
+                - currentInterceptorIndex 每次执行+1
+                - ExposeInvocationInterceptor.invoke(this)->MethodInvocation.proceed
+                - AspectJAfterThrowingAdvice.invoke(this)->MethodInvocation.proceed
+                - AfterReturningAdviceInterceptor.invoke(this)->MethodInvocation.proceed
+                - AspectJAfterAdvice.invoke(this)->MethodInvocation.proceed
+                - MethodBeforeAdviceInterceptor->【前置通知】->MethodInvocation.proceed->MethodInvocation.proceed->return
+                - AspectJAfterAdvice->invokeAdviceMethod(getJoinPointMatch(), null, null);【后置通知】
+                - AfterReturningAdviceInterceptor->没有异常，invokeAdviceMethod【返回通知】（否则抛出异常）
+                - AspectJAfterThrowingAdvice->catch异常，invokeAdviceMethod【异常通知】
+            2. 链式获取每一个拦截器，拦截器执行invoke方法，每一个拦截器等待下一个拦截器执行完成后再来执行。拦截器链的机制，保证通知方法与目标方法的执行顺序
+4. 总结
+    1. @EnableAspectJAutoProxy 开启AOP
+    2. @EnableAspectJAutoProxy 会给容器中注册一个 AnnotationAwareAspectJAutoProxyCreator
+    3. AnnotationAwareAspectJAutoProxyCreator 是一个后置处理器
+    4. 容器的创建流程：
+        1. registerBeanPostProcessor，注册后置处理器，创建 AnnotationAwareAspectJAutoProxyCreator
+        2. finishBeanFactoryInitialization 初始化剩下的单实例Bean
+            1. 创建业务逻辑组件和切面组件
+            2. AnnotationAwareAspectJAutoProxyCreator 拦截组件的创建过程
+            3. 组件创建完成之后，判断组件是否需要增强。是的话就将切面的通知方法包装成增强器，给业务逻辑对象创建一个代理对象
+    5. 执行目标方法
+        代理对象执行目标方法
+        CglibAopProxy.intercept()
+            1. 得到目标方法的拦截器链（增强器包装成拦截器 MethodInterceptor）
+            2. 利用拦截器的链式机制，依次进入每一个拦截器进行执行
+            3. 效果【前置->目标方法->后置->返回 or 异常】
+               
