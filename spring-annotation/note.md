@@ -368,3 +368,15 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
             3. 如果没有拦截器链，直接执行目标方法
             4. 如果有拦截器链，把需要执行的目标对象、目标方法、拦截器等信息传入一个CglibMethodInvocation对象，
                 并调用proceed方法，然后处理返回值
+            5. 拦截器链的触发过程【MethodInvocation.proceed】
+                1. 如果没有拦截器，执行目标方法【invokeJoinpoint();】；或者执行到最后一个拦截器，再【MethodInvocation.proceed】
+                    - currentInterceptorIndex 每次执行+1
+                    - ExposeInvocationInterceptor.invoke(this)->MethodInvocation.proceed
+                    - AspectJAfterThrowingAdvice.invoke(this)->MethodInvocation.proceed
+                    - AfterReturningAdviceInterceptor.invoke(this)->MethodInvocation.proceed
+                    - AspectJAfterAdvice.invoke(this)->MethodInvocation.proceed
+                    - MethodBeforeAdviceInterceptor->【前置通知】->MethodInvocation.proceed->MethodInvocation.proceed->return
+                    - AspectJAfterAdvice->invokeAdviceMethod(getJoinPointMatch(), null, null);【后置通知】
+                    - AfterReturningAdviceInterceptor->没有异常，invokeAdviceMethod【返回通知】（否则抛出异常）
+                    - AspectJAfterThrowingAdvice->catch异常，invokeAdviceMethod【异常通知】
+                2. 链式获取每一个拦截器，拦截器执行invoke方法，每一个拦截器等待下一个拦截器执行完成后再来执行。拦截器链的机制，保证通知方法与目标方法的执行顺序
