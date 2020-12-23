@@ -5,4 +5,8 @@ package com.moralok.bean;
  * @since 2020/12/17
  */
 public class Blue {
+
+    public Blue() {
+        System.out.println("Blue...constructor");
+    }
 }

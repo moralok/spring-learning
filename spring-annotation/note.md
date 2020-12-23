@@ -429,3 +429,21 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
                 - 如果异常，获取事务管理器，进行回滚
                 - 如果正常，利用事务管理器，进行提交
         
+
+# 扩展原理
+
+### BeanFactoryPostProcessor
+
+BeanPostProcessor，Bean后置处理器。Bean创建对象初始化前后进行拦截工作
+BeanFactoryPostProcessor，BeanFactory后置处理器。在BeanFactory标准初始化之后，所有的Bean定义已经加载到BeanFactory，但是Bean实例还未被创建。
+
+步骤
+1. Ioc容器刷新
+2. invokeBeanFactoryPostProcessors(beanFactory);
+    - 如何找到所有的BeanFactoryPostProcessor并执行对应的方法？
+        1. 在BeanFactory中按类型查找
+        2. 分组排序
+        3. 执行对应的方法。
+    - 在创建其它组件前面执行
+        
+
