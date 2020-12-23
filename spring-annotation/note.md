@@ -408,3 +408,24 @@ Spring为我们提供的可以根据当前环境，动态地激活和切换一�
 3. 给方法上标注@Transactional 表示当前方法是一个事务方法
 4. @EnableTransactionManagement 开启基于注解的事务管理功能
 5. 配置事务管理器来控制事务
+
+### 原理
+1. 注解 @EnableTransactionManagement
+    - 利用 TransactionManagementConfigurationSelector 给容器中导入组件
+        1. AutoProxyRegistrar
+        2. ProxyTransactionManagementConfiguration
+2. AutoProxyRegistrar 给容器中注册了一个 InfrastructureAdvisorAutoProxyCreator
+    - 利用后置处理器机制在对象创建之后，包装对象成一个代理对象（增强器）
+    - 代理对象执行方法利用拦截器链进行调用
+3. ProxyTransactionManagementConfiguration做了什么？
+    1. 给容器中注册事务增强器【要用事务注解的信息，AnnotationTransactionAttributeSource解析注解信息】
+    2. 事务拦截器 TransactionInterceptor
+        - 【是一个MethodInterceptor】
+        - 保存了事务的属性信息、事务管理器
+        - 在目标方法执行的时候，执行拦截器链
+            1. 先获取事务属性
+            2. 再获取PlatformTransactionManager，如果没有指定任何tm，则会从容器中获取再获取PlatformTransactionManager
+            3. 执行目标方法
+                - 如果异常，获取事务管理器，进行回滚
+                - 如果正常，利用事务管理器，进行提交
+        
