@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -17,6 +20,7 @@ import java.beans.PropertyVetoException;
  */
 @Configuration
 @ComponentScan("com.moralok.tx")
+@EnableTransactionManagement
 public class TxConfig {
 
     @Bean
@@ -33,5 +37,10 @@ public class TxConfig {
     public JdbcTemplate jdbcTemplate() throws PropertyVetoException {
         // Spring 对 @Configuration 的类特殊处理，给容器中添加组件的方法多次调用只会从容器中查找
         return new JdbcTemplate(dataSource());
+    }
+
+    @Bean
+    public PlatformTransactionManager platformTransactionManager() throws PropertyVetoException {
+        return new DataSourceTransactionManager(dataSource());
     }
 }
