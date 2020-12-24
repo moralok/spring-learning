@@ -15,4 +15,10 @@ public class ExtTest {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ExtConfig.class);
         ac.close();
     }
+
+    @Test
+    public void beanDefinitionRegistryPostProcessorTest() {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ExtConfig.class);
+        ac.close();
+    }
 }

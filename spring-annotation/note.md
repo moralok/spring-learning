@@ -445,5 +445,16 @@ BeanFactoryPostProcessor，BeanFactory后置处理器。在BeanFactory标准初�
         2. 分组排序
         3. 执行对应的方法。
     - 在创建其它组件前面执行
-        
+    
+### BeanDefinitionRegistryPostProcessor 
+
+extends BeanFactoryPostProcessor，在所有Bean定义将要被加载，但Bean实例还未被加载。
+优先于BeanFactoryPostProcessor，可以利用它给容器额外添加组件。
+    
+1. Ioc容器刷新
+2. invokeBeanFactoryPostProcessors(beanFactory);
+3. 从容器中获取所有BeanDefinitionRegistryPostProcessor组件
+    - 依次触发 postProcessBeanDefinitionRegistry
+    - 再依次触发 postProcessBeanFactory
+4. 再处理BeanFactoryPostProcessor
 
