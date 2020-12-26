@@ -458,3 +458,12 @@ extends BeanFactoryPostProcessor，在所有Bean定义将要被加载，但Bean�
     - 再依次触发 postProcessBeanFactory
 4. 再处理BeanFactoryPostProcessor
 
+### ApplicationListener
+
+监听容器中发布的事件，事件驱动模型。
+
+##### 步骤
+1. 写一个监听器来监听某些事件（ApplicationEvent 及其子类）
+2. 把监听器加进容器
+3. 只要容器中有相关事件发生，就能监听到。例如：ContextRefreshedEvent，ContextClosedEvent。
+4. 可以自己发布事件，ac.publishEvent
