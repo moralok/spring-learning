@@ -467,3 +467,32 @@ extends BeanFactoryPostProcessor，在所有Bean定义将要被加载，但Bean�
 2. 把监听器加进容器
 3. 只要容器中有相关事件发生，就能监听到。例如：ContextRefreshedEvent，ContextClosedEvent。
 4. 可以自己发布事件，ac.publishEvent
+
+##### 原理
+1. 【事件发布流程】
+    1. ContextRefreshedEvent
+        1. 容器创建对象，refresh();
+        2. finishRefresh(); 容器刷新完成
+        3. publishEvent(new ContextRefreshedEvent(this));
+            1. 获取事件多播器（派发器），getApplicationEventMulticaster()
+            2. multicastEvent，派发事件
+            3. 获取所有的ApplicationListener
+                - for (final ApplicationListener<?> listener : getApplicationListeners(event, type))
+                - 如果有Executor，可以支持使用Executor进行异步派发，Executor executor = getTaskExecutor();
+                - 否则，同步执行invokeListener(listener, event); 拿到Listener回调onApplicationEvent
+    2. 自己发布事件
+    3. ContextClosedEvent
+    
+2. 事件多播器
+    1. 容器创建对象，refresh();
+    2. initApplicationEventMulticaster(); 初始化事件多播器
+        1. 先在容器中找有没有id="applicationEventMulticaster"的组件
+        2. 如果没有new SimpleApplicationEventMulticaster(beanFactory);
+        3. 加入容器，beanFactory.registerSingleton(APPLICATION_EVENT_MULTICASTER_BEAN_NAME, this.applicationEventMulticaster);
+        
+3. 容器中有哪些监听器呢
+    1. 容器创建对象，refresh();
+    2. registerListeners()
+        - String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);
+        - getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
+        
