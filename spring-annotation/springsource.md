@@ -113,3 +113,13 @@ Spring容器的refresh()【创建刷新】
                         5. 将创建的Bean添加到缓存中singletonObjects。ioc容器就是各类map，保存单实例Bean，环境信息
             3. 检查所有的Bean是否是SmartInitializingSingleton的实现
                 - 如果是，就执行afterSingletonsInstantiated
+12. finishRefresh(); 完成BeanFactory的初始化创建工作，ioc就创建完成。
+    1. initLifecycleProcessor(); 初始化和生命周期有关的后置处理器LifecycleProcessor
+        - 从容器中找是否有lifecycleProcessor的组件，
+        - 如果没有new DefaultLifecycleProcessor();加入容器
+        - 两个方法
+            - void onRefresh();
+            - void onClose();
+    2. getLifecycleProcessor().onRefresh(); 拿到上一步的生命周期处理器，回调
+    3. publishEvent(new ContextRefreshedEvent(this)); 发布容器刷新完成事件
+    4. LiveBeansView.registerApplicationContext(this);
