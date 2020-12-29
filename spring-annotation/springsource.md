@@ -71,6 +71,10 @@ Spring容器的refresh()【创建刷新】
     2. 将每个监听器添加到事件派发器中【getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);】
     3. 派发之前步骤产生的事件
 11. finishBeanFactoryInitialization(beanFactory); 初始化所有剩下的单实例Bean
-    
+    1. beanFactory.preInstantiateSingletons(); 初始化剩下的单实例Bean
+        1. 获取容器中的所有Bean，依次进行初始化和创建对象
+        2. 获取Bean的定义信息：RootBeanDefinition
+        3. Bean不是抽象的且是单实例且不是懒加载
+            1. 判断是否是FactoryBean（是否实现了FactoryBean接口的Bean）
     
     
