@@ -76,5 +76,18 @@ Spring容器的refresh()【创建刷新】
         2. 获取Bean的定义信息：RootBeanDefinition
         3. Bean不是抽象的且是单实例且不是懒加载
             1. 判断是否是FactoryBean（是否实现了FactoryBean接口的Bean）
-    
-    
+            2. 不是工厂Bean，利用getBean(beanName);创建对象
+                0. getBean(beanName);
+                1. doGetBean(name, null, null, false);
+                2. 先获取缓存中保存的单实例Bean，如果能获取到，说明之前创建过（创建过就会被缓存）【private final Map<String, Object> singletonObjects = new ConcurrentHashMap<String, Object>(256);】
+                3. 缓存中获取不到，开始Bean的创建对象流程
+                4. 标记当前Bean已经被创建
+                5. 获取Bean的定义信息
+                6. 【获取当前Bean依赖的其他Bean，如果有按照getBean()，把依赖的Bean先创建出来】
+                7. 启动单实例的创建流程
+                    1. createBean(beanName, mbd, args);
+                    2. Object bean = resolveBeforeInstantiation(beanName, mbdToUse); 让BeanPostProcessor【InstantiationAwareBeanPostProcessor】先拦截返回代理对象
+                        - InstantiationAwareBeanPostProcessor 此时执行
+                        - 触发postProcessBeforeInstantiation
+                        - 如果有返回值，触发postProcessAfterInitialization
+                    
