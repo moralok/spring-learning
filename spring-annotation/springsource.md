@@ -50,7 +50,17 @@ Spring容器的refresh()【创建刷新】
     4. 再注册没有实现优先级接口的BeanPostProcessor
     5. 最后注册internalPostProcessors【MergedBeanDefinitionPostProcessor】
     6. 还注册ApplicationListenerDetector，在Bean创建完成后检查是否是ApplicationListener【this.applicationContext.addApplicationListener((ApplicationListener<?>) bean);】
-    
+7. initMessageSource(); 初始化MessageSource组件（做国际化）
+    1. 获取BeanFactory
+    2. 看容器中是否有messageSource的组件（取出国际化配置文件中的某个key的值，能按照区域信息获取）
+        - 如果有，赋值给messageSource
+        - 如果没有，创建一个DelegatingMessageSource
+    3. 把创建好的MessageSource注册到容器中
+        - beanFactory.registerSingleton(MESSAGE_SOURCE_BEAN_NAME, this.messageSource);
+        - 用于自动注册
+        - MessageSource.getMessage(String code, Object[] args, Locale locale) throws NoSuchMessageException;
+        
+
     
     
     
