@@ -496,3 +496,15 @@ extends BeanFactoryPostProcessor，在所有Bean定义将要被加载，但Bean�
         - String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);
         - getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
         
+### @EventListener 和 SmartInitializingSingleton
+
+@EventListener 可以指定方法监听事件，使用EventListenerMethodProcessor实现，它实现了SmartInitializingSingleton接口。
+
+##### SmartInitializingSingleton 原理
+1. ioc容器创建对象并刷新容器
+2. finishBeanFactoryInitialization(beanFactory); 初始化剩下的单实例Bean
+3. beanFactory.preInstantiateSingletons();
+    1. 循环遍历先创建所有的单实例Bean，getBean(beanName);
+    2. 获取所有创建好的单实例Bean，判断是否是SmartInitializingSingleton类型，如果是就调用方法
+    
+
