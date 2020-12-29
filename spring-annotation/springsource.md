@@ -59,8 +59,18 @@ Spring容器的refresh()【创建刷新】
         - beanFactory.registerSingleton(MESSAGE_SOURCE_BEAN_NAME, this.messageSource);
         - 用于自动注册
         - MessageSource.getMessage(String code, Object[] args, Locale locale) throws NoSuchMessageException;
-        
-
+8. initApplicationEventMulticaster(); 初始化事件派发器
+    1. 获取BeanFactory
+    2. 从BeanFactory中获取applicationEventMulticaster【ApplicationEventMulticaster】的组件
+    3. 如果没有配置，创建一个SimpleApplicationEventMulticaster
+    4. 将创建的ApplicationEventMulticaster添加到BeanFactory中，用以自动注入
+9. onRefresh(); 留给子容器（子类）
+    - 子类重写这个方法，在容器刷新的时候可以自定义逻辑
+10. registerListeners(); 给容器中将所有项目里面的ApplicationListener注册进来
+    1. 从容器中拿到所有的ApplicationListeners
+    2. 将每个监听器添加到事件派发器中【getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);】
+    3. 派发之前步骤产生的事件
+11. finishBeanFactoryInitialization(beanFactory); 初始化所有剩下的单实例Bean
     
     
     
