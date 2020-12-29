@@ -90,4 +90,26 @@ Spring容器的refresh()【创建刷新】
                         - InstantiationAwareBeanPostProcessor 此时执行
                         - 触发postProcessBeforeInstantiation
                         - 如果有返回值，触发postProcessAfterInitialization
-                    
+                    3. 如果前面的InstantiationAwareBeanPostProcessor没有返回代理对象，继续4
+                    4. Object beanInstance = doCreateBean(beanName, mbdToUse, args);
+                        1. 【创建Bean实例】：createBeanInstance(beanName, mbd, args); 利用工厂方法或者对象的构造器创建出Bean实例
+                        2. applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName); 调用MergedBeanDefinitionPostProcessor的postProcessMergedBeanDefinition方法
+                        3. 【Bean属性赋值】populateBean(beanName, mbd, instanceWrapper);
+                            1. 拿到InstantiationAwareBeanPostProcessor后置处理器调用postProcessAfterInstantiation
+                            2. 拿到InstantiationAwareBeanPostProcessor后置处理器调用postProcessPropertyValues
+                            - 赋值之前
+                            3. 应用Bean属性的值：为属性利用setter方法进行赋值：applyPropertyValues(beanName, mbd, bw, pvs);
+                        4. 【Bean初始化】initializeBean(beanName, exposedObject, mbd);
+                            1. 【执行Aware接口方法】invokeAwareMethods(beanName, bean); 执行xxxAware接口的方法
+                                - BeanNameAware
+                                - BeanClassLoaderAware
+                                - BeanFactoryAware
+                            2. 【执行后置处理器初始化前】applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);（postProcessBeforeInitialization）
+                            3. 【执行初始化方法】invokeInitMethods(beanName, wrappedBean, mbd);
+                                1. 是否实现InitializingBean接口：执行afterPropertiesSet
+                                2. 是否自定义初始化方法
+                            4. 【执行后置处理器初始化前】applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);（postProcessAfterInitialization）
+                            5. 按需注册Bean销毁方法：registerDisposableBeanIfNecessary(beanName, bean, mbd);
+                        5. 将创建的Bean添加到缓存中singletonObjects。ioc容器就是各类map，保存单实例Bean，环境信息
+            3. 检查所有的Bean是否是SmartInitializingSingleton的实现
+                - 如果是，就执行afterSingletonsInstantiated
