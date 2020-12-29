@@ -37,3 +37,20 @@ Spring容器的refresh()【创建刷新】
             2. 看优先级执行PriorityOrdered的 postProcessor.postProcessBeanFactory(beanFactory);
             3. 看优先级执行Ordered的 postProcessor.postProcessBeanFactory(beanFactory);
             4. 执行没有优先级顺序的 postProcessor.postProcessBeanFactory(beanFactory);
+6. registerBeanPostProcessors(beanFactory); 注册BeanPostProcessor【Bean后置处理器】
+    - 不同类型的的BeanPostProcessor，在Bean创建前后的执行时机是不一样的
+        - BeanPostProcessor
+        - DestructionAwareBeanPostProcessor
+        - InstantiationAwareBeanPostProcessor、
+        - martInstantiationAwareBeanPostProcessor
+        - MergedBeanDefinitionPostProcessor【internalPostProcessors】
+    1. 获取所有的BeanPostProcessor【允许实现PriorityOrdered、Ordered接口指定优先级】
+    2. 先注册PriorityOrdered优先级接口的BeanPostProcessor，把每一个BeanPostProcessor添加到BeanFactory中【beanFactory.addBeanPostProcessor(postProcessor);】
+    3. 再注册Ordered优先级接口的BeanPostProcessor
+    4. 再注册没有实现优先级接口的BeanPostProcessor
+    5. 最后注册internalPostProcessors【MergedBeanDefinitionPostProcessor】
+    6. 还注册ApplicationListenerDetector，在Bean创建完成后检查是否是ApplicationListener【this.applicationContext.addApplicationListener((ApplicationListener<?>) bean);】
+    
+    
+    
+    
