@@ -23,3 +23,17 @@ Spring容器的refresh()【创建刷新】
     - 子类通过重写这个方法在BeanFactory创建并预准备完成后做进一步的设置
 
 > 以上是BeanFactory的创建与预准备工作
+
+5. invokeBeanFactoryPostProcessors(beanFactory); 执行BeanFactoryPostProcessor
+    - BeanFactory的后置处理器，在BeanFactory标准初始化之后执行的
+    - 两个接口：
+        - 先执行 BeanDefinitionRegistryPostProcessor
+            1. 获取所有的BeanDefinitionRegistryPostProcessor
+            2. 看优先级执行PriorityOrdered的 postProcessor.postProcessBeanDefinitionRegistry(registry);
+            3. 看优先级执行Ordered的 postProcessor.postProcessBeanDefinitionRegistry(registry);
+            4. 执行没有优先级顺序的 postProcessor.postProcessBeanDefinitionRegistry(registry);
+        - 再执行 BeanFactoryPostProcessor
+            1. 获取所有的 BeanFactoryPostProcessor
+            2. 看优先级执行PriorityOrdered的 postProcessor.postProcessBeanFactory(beanFactory);
+            3. 看优先级执行Ordered的 postProcessor.postProcessBeanFactory(beanFactory);
+            4. 执行没有优先级顺序的 postProcessor.postProcessBeanFactory(beanFactory);
