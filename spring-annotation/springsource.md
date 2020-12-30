@@ -1,4 +1,4 @@
-Spring容器的refresh()【创建刷新】
+## Spring容器的refresh()【创建刷新】
 1. prepareRefresh() 刷新前的预处理工作;
     1. initPropertySources() 初始化一些属性设置；子类自定义个性化的属性设置方法。
     2. getEnvironment().validateRequiredProperties(); 检验属性的合法
@@ -123,3 +123,18 @@ Spring容器的refresh()【创建刷新】
     2. getLifecycleProcessor().onRefresh(); 拿到上一步的生命周期处理器，回调
     3. publishEvent(new ContextRefreshedEvent(this)); 发布容器刷新完成事件
     4. LiveBeansView.registerApplicationContext(this);
+    
+## 总结
+1. Spring容器在启动的时候，先会保存所有注册进来的Bean的定义信息
+    1. Xml注册Bean：<bean>
+    2. 注解注册Bean：@Service、@Component、@Bean。。。
+2. Spring容器会在合适的时机创建Bean
+    1. 用到Bean的时候：利用getBean创建Bean，创建好以后保存在容器里
+    2. 统一创建剩下所有Bean的时候：finishBeanFactoryInitialization()
+3. 后置处理器：每一个Bean创建完成，都会使用各种后置处理器进行处理，来增强Bean的功能
+    - AutowiredAnnotationBeanPostProcessor：处理自动注入
+    - AnnotationAwareAspectJAutoProxyCreator：AOP功能
+    - AsyncAnnotationBeanPostProcessor
+4. 事件驱动模型
+    ApplicationListener：事件监听
+    ApplicationEventMulticaster：事件派发
