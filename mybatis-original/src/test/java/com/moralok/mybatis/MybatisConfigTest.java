@@ -46,7 +46,7 @@ public class MybatisConfigTest {
         // 获取sqlSession实例，能直接执行已经映射的sql语句
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // sql的唯一标识和sql执行需要的参数
-            Employee employee = sqlSession.selectOne("com.moralok.mybatis.mapper.EmployeeMapper.selectEmployee", 1);
+            Employee employee = sqlSession.selectOne("com.moralok.mybatis.mapper.EmployeeMapper.getEmployeeById", 1);
             System.out.println(employee);
         } catch (Exception e) {
             e.printStackTrace();
