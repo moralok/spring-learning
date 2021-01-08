@@ -21,3 +21,30 @@ settings包含很多重要的设置项，用来设置每一个设置项。name:�
 - 别名不区分大小写
 - @Alias(3): 使用注解自定义别名（优先级更高，解决包扫描下自动取别名冲突）
 - 内建的别名如int=Integer，_int=int
+
+##### typeHandlers类型处理器
+
+后续细看
+
+##### plugins插件
+
+通过动态代理在以下四大组件中的方法进行拦截。
+
+- Executor: 执行器
+- ParameterHandler 参数处理器
+- ResultSetHandler 结果集处理器
+- StatementHandler 语句处理器
+
+##### environments运行环境
+
+mybatis可以配置多套环境，每一个环境必须有transactionManager和dataSource标签。
+id代表环境的唯一标识，使用default快速指定环境。 
+- transactionManager，事务管理器
+    1. JDBC(JdbcTransactionFactory)
+    2. MANAGED(ManagedTransactionFactory)
+    3. 自定义事务管理器（交给Spring），实现TransactionFactory接口，type指定为全类名
+- dataSource，数据源
+    1. UNPOOLED(UnpooledDataSourceFactory)
+    2. POOLED(PooledDataSourceFactory)
+    3. JNDI(JndiDataSourceFactory)
+    4. 自定义数据源，实现DataSourceFactory接口，type指定为全类名
