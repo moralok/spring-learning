@@ -3,12 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moralok.mybatis.mapper.EmployeeMapper">
-    <!--namespace：名称空间-->
+    <!--namespace：名称空间(接口式编程，应该使用接口全类名)-->
     <!--id：唯一标识-->
     <!--resultType：返回值类型-->
     <!--#{id}：从传递过来的参数中取出id值-->
 
-    <select id="selectEmployee" resultType="com.moralok.mybatis.Employee">
-        select * from tbl_employee where id = #{id}
+    <select id="getEmployeeById" resultType="com.moralok.mybatis.Employee">
+        select id, last_name lastName, gender, email from tbl_employee where id = #{id}
     </select>
 </mapper>
