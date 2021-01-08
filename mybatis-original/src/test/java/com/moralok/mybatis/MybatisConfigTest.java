@@ -11,6 +11,19 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * 1. 接口式编程
+ *     原生：      DAO     ====>       DaoImpl
+ *     Mybatis：  Mapper  ====>       xxxMapper.xml
+ *
+ * 2. SqlSession代表和数据库的一次会话，用完必须关闭。
+ * 3. SqlSession和connection一样都是非线程安全的，每次使用都要获取新的。
+ * 4. Mapper接口没有实现类，但是Mybatis会为接口生成一个代理对象
+ *     EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+ *     代理对象将接口和xml进行绑定
+ * 5. 两个重要的配置文件
+ *     1. mybatis的全局配置文件（设置和属性），包含数据库连接信息，事务管理信息和系统运行环境信息
+ *     2. SQL映射文件（定义DAO的实现类如何工作），保存了每一个SQL语句的映射信息（将SQL抽取出来）
+ *
  * @author moralok
  * @since 2021/1/8 4:43 下午
  */
