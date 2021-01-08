@@ -1,9 +1,12 @@
-package com.moralok.mybatis;
+package com.moralok.mybatis.bean;
+
+import org.apache.ibatis.type.Alias;
 
 /**
  * @author moralok
  * @since 2021/1/8 4:57 下午
  */
+@Alias("emp")
 public class Employee {
 
     private Integer id;

@@ -1,5 +1,6 @@
 package com.moralok.mybatis;
 
+import com.moralok.mybatis.bean.Employee;
 import com.moralok.mybatis.mapper.EmployeeMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

@@ -1,6 +1,6 @@
 package com.moralok.mybatis.mapper;
 
-import com.moralok.mybatis.Employee;
+import com.moralok.mybatis.bean.Employee;
 
 /**
  * @author moralok
