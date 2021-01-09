@@ -21,7 +21,7 @@ public interface EmployeeMapper {
      *
      * @param employee
      */
-    void addEmployee(Employee employee);
+    int addEmployee(Employee employee);
 
     /**
      * 更新

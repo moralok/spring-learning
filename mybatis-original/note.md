@@ -80,7 +80,11 @@ mybatis会加载默认不带标识和带数据库厂商标识的SQL语句，如�
 
 ##### 增删改查
 
-sqlSession 默认不自动提交，允许增删改定义以下返回值：
+sqlSession 默认不自动提交。
+- sqlSessionFactory.openSession() 不自动提交
+- sqlSessionFactory.openSession(true) 自动提交 
+
+允许增删改定义以下返回值：
 - Integer
 - Boolean
 - Long
@@ -90,3 +94,7 @@ sqlSession 默认不自动提交，允许增删改定义以下返回值：
 - delete
 - update
 - select
+
+insert 获取自增主键（Statement.getGeneratedKeys）
+1. Mybatis使用useGenerateKeys=true
+2. keyProperty="idName"指定对应的主键属性，Mybatis会封装给JavaBean的这个属性

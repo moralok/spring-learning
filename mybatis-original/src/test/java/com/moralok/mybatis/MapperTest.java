@@ -24,7 +24,9 @@ public class MapperTest {
         // 默认不是自动提交
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-            mapper.addEmployee(new Employee(null, "Cat", true, "cat@gmail.com"));
+            Employee employee = new Employee(null, "Cat", true, "cat@gmail.com");
+            int id = mapper.addEmployee(employee);
+            System.out.println("新增记录返回值 " + id + " 主键ID " + employee.getId());
             sqlSession.commit();
         }
     }
