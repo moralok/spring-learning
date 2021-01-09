@@ -15,4 +15,26 @@ public interface EmployeeMapper {
      * @return
      */
     Employee getEmployeeById(Integer id);
+
+    /**
+     * 添加
+     *
+     * @param employee
+     */
+    void addEmployee(Employee employee);
+
+    /**
+     * 更新
+     *
+     * @param employee
+     * @return
+     */
+    int updateEmployee(Employee employee);
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    void deleteEmployeeById(Integer id);
 }

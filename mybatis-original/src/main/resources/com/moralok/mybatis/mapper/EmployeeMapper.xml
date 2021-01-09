@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moralok.mybatis.mapper.EmployeeMapper">
+    <insert id="addEmployee" parameterType="com.moralok.mybatis.bean.Employee">
+        insert into tbl_employee (last_name, gender, email)
+        values (#{lastName}, #{gender}, #{email})
+    </insert>
+    <update id="updateEmployee">
+        update tbl_employee
+        set last_name = #{lastName}, gender = #{gender}, email = #{email}
+        where id = #{id}
+    </update>
+    <delete id="deleteEmployeeById">
+        delete from tbl_employee where id = #{id}
+    </delete>
     <!--namespace：名称空间(接口式编程，应该使用接口全类名)-->
     <!--id：唯一标识-->
     <!--resultType：返回值类型-->

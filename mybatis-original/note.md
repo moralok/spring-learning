@@ -73,3 +73,20 @@ mybatis会加载默认不带标识和带数据库厂商标识的SQL语句，如�
 - package 批量注册
     
 推荐通过配置文件写SQL文件，除非很简单不重要的。
+
+##### objectFactory
+
+### 映射文件
+
+##### 增删改查
+
+sqlSession 默认不自动提交，允许增删改定义以下返回值：
+- Integer
+- Boolean
+- Long
+
+方法有以下：
+- insert
+- delete
+- update
+- select

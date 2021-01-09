@@ -17,6 +17,16 @@ public class Employee {
 
     private String email;
 
+    public Employee() {
+    }
+
+    public Employee(Integer id, String lastName, Boolean gender, String email) {
+        this.id = id;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.email = email;
+    }
+
     public Integer getId() {
         return id;
     }
