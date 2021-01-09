@@ -2,6 +2,7 @@ package com.moralok.mybatis;
 
 import com.moralok.mybatis.bean.Employee;
 import com.moralok.mybatis.mapper.EmployeeMapper;
+import com.moralok.mybatis.mapper.EmployeeMapperAnnotation;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -68,6 +69,19 @@ public class MybatisConfigTest {
             // 3. 获取接口的实现类
             // mybatis会为接口自动创建一个代理对象，代理对象去执行增删改查方法
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            System.out.println(mapper.getClass());
+            Employee employee = mapper.getEmployeeById(1);
+            System.out.println(employee);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void useClassRegisterMapper() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperAnnotation mapper = sqlSession.getMapper(EmployeeMapperAnnotation.class);
             System.out.println(mapper.getClass());
             Employee employee = mapper.getEmployeeById(1);
             System.out.println(employee);
