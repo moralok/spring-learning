@@ -48,3 +48,14 @@ id代表环境的唯一标识，使用default快速指定环境。
     2. POOLED(PooledDataSourceFactory)
     3. JNDI(JndiDataSourceFactory)
     4. 自定义数据源，实现DataSourceFactory接口，type指定为全类名
+    
+##### databaseIdProvider
+
+支持多数据库厂商，type=VENDOR(VendorDatabaseIdProvider)，mybatis就能根据数据库厂商标识来执行不同的SQL。
+驱动的Connection->getMetaData->getDatabaseProductName。
+- MySQL
+- Oracle
+- SQL Server
+- 等等
+
+mybatis会加载默认不带标识和带数据库厂商标识的SQL语句，如果重名，不带标识的语句会被舍弃。

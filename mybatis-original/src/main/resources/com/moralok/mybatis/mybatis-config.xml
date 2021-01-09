@@ -32,6 +32,14 @@
             </dataSource>
         </environment>
     </environments>
+
+    <databaseIdProvider type="DB_VENDOR">
+        <!--取别名-->
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+
     <!--将我们写好的sql映射文件注册到全局配置文件中-->
     <mappers>
         <mapper resource="com/moralok/mybatis/mapper/EmployeeMapper.xml"/>
