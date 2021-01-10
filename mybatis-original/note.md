@@ -138,4 +138,8 @@ insert 获取自增主键（Statement.getGeneratedKeys）
             - names集合的key作为取值的参考`args[key]`
             - `{"id"=args[0],"lastName"="args[1],"2"=args[2]}`
             - 额外也保存`{"params1"=args[0],..."paramsN"=args[N-1]}`
-    
+##### #和$取值的区别
+- `#{}` 和 `${}` 都可以取值
+- `#{}` 是以预编译的形式，将参数设置到sql语句中，PreparedStatement（id = ?）
+- `${}` 是取出的值直接拼装到sql语句中，会有安全问题（id = 2）
+- 大多数情况中，应该用#{}，有些情况下JDBC不支持占位符，例如分表场景拼接表名，2020_salary；排序拼接字段名 order by id
