@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,6 +80,20 @@ public class MapperTest {
             map.put("lastName", "Cat");
             Employee employee = mapper.getEmployeeByMap(map);
             System.out.println("多参数使用map封装方法返回值 " + employee);
+            sqlSession.commit();
+        }
+    }
+
+    @Test
+    void listTest() throws IOException {
+        // 测试返回集合
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            List<Employee> employees = mapper.listEmployeeByLastNameLike("%a%");
+            for (Employee e : employees) {
+                System.out.println("方法集合 " + e);
+            }
             sqlSession.commit();
         }
     }

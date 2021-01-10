@@ -152,3 +152,7 @@ insert 获取自增主键（Statement.getGeneratedKeys）
         - JdbcType.OTHER：无效的类型。Mybatis对所有的null都映射为JDBC原生的OTHER(Types.OTHER)
         - 通过 #{email, jdbcType=NULL}
         - 也可以通过全局配置jdbcTypeForNull=NULL
+        
+### select
+
+##### select返回集合
