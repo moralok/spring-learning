@@ -117,3 +117,25 @@ insert 获取自增主键（Statement.getGeneratedKeys）
         - Collection->collection
         - List->list，比如`#{list[0]}`
         - array->array
+        
+##### 参数处理-封装map源码解析
+1. MapperProxy->invoke，如果是Object下的方法，直接执行。
+2. mapperMethod.execute(sqlSession, args);
+3. method.convertArgsToSqlCommandParam(args);
+4. ParamNameResolver.getNamedParams 解析参数封装map
+    - 【构造器】
+        1. 获取每一个标了@Param注解的参数的value：id和lastName，赋值给name
+        2. 解析一个参数，在map中保存(key参数索引, name)，name的值，类似于{0=id,1=lastName,2=2}
+            - 标注@Param，注解的值
+            - 没有注解
+                - 全局配置：useActualParamName（jdk1.8），name=参数名
+                - name=map.size()，相当于当前索引
+    - 【getNamedParams】
+        1. 参数为null，返回null
+        2. 如果只有一个参数，并且没有@Param，返回`args[0]`
+        3. 多个参数或者单个参数标注了@Param，封装map
+            - 遍历names集合，value作为key，names={0="id",1="lastName",2="2"}
+            - names集合的key作为取值的参考`args[key]`
+            - `{"id"=args[0],"lastName"="args[1],"2"=args[2]}`
+            - 额外也保存`{"params1"=args[0],..."paramsN"=args[N-1]}`
+    
