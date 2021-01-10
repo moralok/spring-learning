@@ -98,6 +98,32 @@ public class MapperTest {
         }
     }
 
+    @Test
+    void testGetReturnMap() throws IOException {
+        // 测试返回集合
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            Map<String, Object> employee = mapper.getEmployeeByIdReturnMap(4);
+            System.out.println("返回map" + employee);
+            sqlSession.commit();
+        }
+    }
+
+    @Test
+    void listReturnMapTest() throws IOException {
+        // 测试返回Map
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            Map<String, Employee> employees = mapper.listEmployeeByLastNameReturnMap("%a%");
+            for (Map.Entry<String, Employee> entry : employees.entrySet()) {
+                System.out.println("返回map集合 " + entry.getKey() + " " + entry.getValue());
+            }
+            sqlSession.commit();
+        }
+    }
+
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "com/moralok/mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);

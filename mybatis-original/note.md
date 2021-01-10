@@ -155,4 +155,14 @@ insert 获取自增主键（Statement.getGeneratedKeys）
         
 ### select
 
+- id: 唯一标识符
+- parameterType: 参数类型。可以不传，Mybatis会根据TypeHandler自动推断。
+- resultType: 返回值类型
+    - 别名或全类名，集合使用元素类型
+    - 不能和resultMap共用
+
 ##### select返回集合
+
+##### select返回封装map
+1. 返回一条记录的map，key就是列名，值就是对应的值
+2. 多条记录封装map，使用@MapKey("id")指定key

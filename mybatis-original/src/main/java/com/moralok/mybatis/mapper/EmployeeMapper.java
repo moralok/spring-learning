@@ -1,6 +1,7 @@
 package com.moralok.mybatis.mapper;
 
 import com.moralok.mybatis.bean.Employee;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -66,4 +67,21 @@ public interface EmployeeMapper {
      * @return list
      */
     List<Employee> listEmployeeByLastNameLike(String lastName);
+
+    /**
+     * 查询
+     *
+     * @param id id
+     * @return map
+     */
+    Map<String, Object> getEmployeeByIdReturnMap(Integer id);
+
+    /**
+     * 查询
+     *
+     * @param lastName lastName
+     * @return map
+     */
+    @MapKey("lastName")
+    Map<String, Employee> listEmployeeByLastNameReturnMap(String lastName);
 }

@@ -36,4 +36,10 @@
     <select id="listEmployeeByLastNameLike" resultType="com.moralok.mybatis.bean.Employee">
         select * from tbl_employee where last_name like #{lastName}
     </select>
+    <select id="getEmployeeByIdReturnMap" resultType="java.util.Map">
+        select * from tbl_employee where id = #{id}
+    </select>
+    <select id="listEmployeeByLastNameReturnMap" resultType="com.moralok.mybatis.bean.Employee">
+        select * from tbl_employee where last_name like #{lastName}
+    </select>
 </mapper>
