@@ -54,6 +54,18 @@ public class MapperTest {
         }
     }
 
+    @Test
+    void multiParamsTest() throws IOException {
+        // 测试多参数
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            Employee employee = mapper.getEmployeeByIdAndLastName(4, "Cat");
+            System.out.println("多参数方法返回值 " + employee);
+            sqlSession.commit();
+        }
+    }
+
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "com/moralok/mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);

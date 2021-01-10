@@ -1,6 +1,7 @@
 package com.moralok.mybatis.mapper;
 
 import com.moralok.mybatis.bean.Employee;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author moralok
@@ -20,6 +21,7 @@ public interface EmployeeMapper {
      * 添加
      *
      * @param employee
+     * @return int
      */
     int addEmployee(Employee employee);
 
@@ -37,4 +39,13 @@ public interface EmployeeMapper {
      * @param id
      */
     void deleteEmployeeById(Integer id);
+
+    /**
+     * 查询
+     *
+     * @param id id
+     * @param lastName lastName
+     * @return
+     */
+    Employee getEmployeeByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
 }

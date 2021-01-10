@@ -27,4 +27,7 @@
     <select id="getEmployeeById" resultType="emp" databaseId="oracle">
         select EMPLOYEE_ID id, LAST_NAME lastName, EMAIL email from tbl_employee where id = #{id}
     </select>
+    <select id="getEmployeeByIdAndLastName" resultType="com.moralok.mybatis.bean.Employee">
+        select * from tbl_employee where id = #{id} and last_name = #{lastName}
+    </select>
 </mapper>

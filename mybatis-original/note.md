@@ -98,3 +98,14 @@ sqlSession 默认不自动提交。
 insert 获取自增主键（Statement.getGeneratedKeys）
 1. Mybatis使用useGenerateKeys=true
 2. keyProperty="idName"指定对应的主键属性，Mybatis会封装给JavaBean的这个属性
+
+##### 参数处理&单个参数&多个参数&命名
+
+1. 单个参数：mybatis不会做特殊处理，#{参数名任意取}取出参数值
+2. 多个参数：
+    - 未处理时出现异常：`org.apache.ibatis.binding.BindingException: Parameter 'id' not found. Available parameters are [0, 1, param1, param2]`
+    - 原因：mybatis特殊处理，多个参数被封装成一个map，#{}就是从map中获取指定key的值
+        - key：param1...paramN，或者使用索引0...N-1
+        - value：参数值
+    - 推荐命名参数：明确指定封装参数时map的key，使用@Param，key就是注解指定的值
+    
