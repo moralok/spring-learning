@@ -138,8 +138,17 @@ insert 获取自增主键（Statement.getGeneratedKeys）
             - names集合的key作为取值的参考`args[key]`
             - `{"id"=args[0],"lastName"="args[1],"2"=args[2]}`
             - 额外也保存`{"params1"=args[0],..."paramsN"=args[N-1]}`
-##### #和$取值的区别
+##### #和$取值的区别以及#{}的特殊用法
 - `#{}` 和 `${}` 都可以取值
 - `#{}` 是以预编译的形式，将参数设置到sql语句中，PreparedStatement（id = ?）
 - `${}` 是取出的值直接拼装到sql语句中，会有安全问题（id = 2）
 - 大多数情况中，应该用#{}，有些情况下JDBC不支持占位符，例如分表场景拼接表名，2020_salary；排序拼接字段名 order by id
+- 特殊用法#{}，
+    - 指定参数的规则
+        - javaType、jdbcType、mode（存储过程）、numericScale
+        - resultMap、typeHandler、jdbcTypeName、expression（未来准备支持的特性）
+    - 一般用不到，说一下jdbcType在某些特殊场景下需要被设置
+        - 在我们数据为null时，有些数据库可能不能识别mybatis对null的默认处理（Oracle）
+        - JdbcType.OTHER：无效的类型。Mybatis对所有的null都映射为JDBC原生的OTHER(Types.OTHER)
+        - 通过 #{email, jdbcType=NULL}
+        - 也可以通过全局配置jdbcTypeForNull=NULL
