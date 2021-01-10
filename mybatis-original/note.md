@@ -112,3 +112,8 @@ insert 获取自增主键（Statement.getGeneratedKeys）
     3. POJO：如果参数正好是我们业务逻辑的数据模型，我们可以直接传入POJO，使用#{属性名}进行取值
     4. map：如果不是属于POJO属性
     5. TO：如果不是属于POJO属性但是非常常用，例如Page{int page, int size}
+    6. 多层次嵌套使用.分隔，#{employee.lastName}
+    7. Collection(List, Set)或者数组，也会特殊处理
+        - Collection->collection
+        - List->list，比如`#{list[0]}`
+        - array->array
