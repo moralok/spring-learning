@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author moralok
@@ -62,6 +64,21 @@ public class MapperTest {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
             Employee employee = mapper.getEmployeeByIdAndLastName(4, "Cat");
             System.out.println("多参数方法返回值 " + employee);
+            sqlSession.commit();
+        }
+    }
+
+    @Test
+    void multiParamsUseMapTest() throws IOException {
+        // 测试多参数
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", 4);
+            map.put("lastName", "Cat");
+            Employee employee = mapper.getEmployeeByMap(map);
+            System.out.println("多参数使用map封装方法返回值 " + employee);
             sqlSession.commit();
         }
     }

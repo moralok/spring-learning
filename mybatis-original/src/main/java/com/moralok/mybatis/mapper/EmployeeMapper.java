@@ -3,6 +3,8 @@ package com.moralok.mybatis.mapper;
 import com.moralok.mybatis.bean.Employee;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Map;
+
 /**
  * @author moralok
  * @since 2021/1/8 5:52 下午
@@ -45,7 +47,14 @@ public interface EmployeeMapper {
      *
      * @param id id
      * @param lastName lastName
-     * @return
+     * @return employee
      */
     Employee getEmployeeByIdAndLastName(@Param("id") Integer id, @Param("lastName") String lastName);
+
+    /**
+     * 查询
+     * @param map 参数map
+     * @return employee
+     */
+    Employee getEmployeeByMap(Map<String, Object> map);
 }

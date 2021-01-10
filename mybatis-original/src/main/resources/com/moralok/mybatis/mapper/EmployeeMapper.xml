@@ -30,4 +30,7 @@
     <select id="getEmployeeByIdAndLastName" resultType="com.moralok.mybatis.bean.Employee">
         select * from tbl_employee where id = #{id} and last_name = #{lastName}
     </select>
+    <select id="getEmployeeByMap" resultType="com.moralok.mybatis.bean.Employee">
+        select * from tbl_employee where id = #{id} and last_name = #{lastName}
+    </select>
 </mapper>
