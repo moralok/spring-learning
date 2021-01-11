@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moralok.mybatis.mapper.EmployeeMapperDynamicSql">
 
-    <select id="listEmployeeByCondition" resultType="com.moralok.mybatis.bean.Employee">
+    <select id="listEmployeeByConditionIf" resultType="com.moralok.mybatis.bean.Employee">
         select *
         from tbl_employee
         <where>
@@ -21,5 +21,23 @@
               and email = #{email}
           </if>
         </where>
+    </select>
+    <select id="listEmployeeByConditionTrim" resultType="com.moralok.mybatis.bean.Employee">
+        select *
+        from tbl_employee
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="lastName != null and lastName != ''">
+                and last_name like #{lastName}
+            </if>
+            <if test="gender == 0 or gender == 1">
+                and gender = #{gender}
+            </if>
+            <if test="email != null and email.trim() != ''">
+                and email = #{email}
+            </if>
+        </trim>
     </select>
 </mapper>

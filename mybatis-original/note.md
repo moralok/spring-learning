@@ -226,4 +226,8 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 
 缺点：有人会将and放在语句结尾（不要这么写不就好了。。。）
 
-
+##### trim 自定义sql截取规则
+- prefix：加前缀
+- prefixOverrides：覆盖前缀
+- suffix：加后缀
+- suffixOverrides：覆盖后缀

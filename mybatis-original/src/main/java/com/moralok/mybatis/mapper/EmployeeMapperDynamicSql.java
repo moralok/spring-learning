@@ -16,5 +16,13 @@ public interface EmployeeMapperDynamicSql {
      * @param employee 条件
      * @return
      */
-    List<Employee> listEmployeeByCondition(Employee employee);
+    List<Employee> listEmployeeByConditionIf(Employee employee);
+
+    /**
+     * 查询
+     *
+     * @param employee 条件
+     * @return
+     */
+    List<Employee> listEmployeeByConditionTrim(Employee employee);
 }

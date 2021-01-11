@@ -2,7 +2,6 @@ package com.moralok.mybatis;
 
 import com.moralok.mybatis.bean.Employee;
 import com.moralok.mybatis.mapper.EmployeeMapperDynamicSql;
-import com.moralok.mybatis.mapper.EmployeeMapperPlus;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,12 +19,25 @@ import java.util.List;
 public class DynamicSqlTest {
 
     @Test
-    void ifTest() throws IOException {
+    void ifAndWhereTest() throws IOException {
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
             Employee employee = new Employee(null, "%o%", null ,null);
-            List<Employee> employees = mapper.listEmployeeByCondition(employee);
+            List<Employee> employees = mapper.listEmployeeByConditionIf(employee);
+            System.out.println(employees);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void trimTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
+            Employee employee = new Employee(null, "%o%", null ,null);
+            List<Employee> employees = mapper.listEmployeeByConditionTrim(employee);
             System.out.println(employees);
         } catch (Exception e) {
             e.printStackTrace();
