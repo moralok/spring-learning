@@ -176,4 +176,5 @@ insert 获取自增主键（Statement.getGeneratedKeys）
     - id，定义主键底层会有优化
     - column，指定哪一列
     - property，指定对应的JavaBean属性
-    - 不指定的列也会自动封装，但是推荐全写上
+    - 不指定的列也会自动封装，但是推荐全写上Depart
+    

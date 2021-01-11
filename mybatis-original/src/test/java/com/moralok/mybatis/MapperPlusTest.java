@@ -1,7 +1,6 @@
 package com.moralok.mybatis;
 
 import com.moralok.mybatis.bean.Employee;
-import com.moralok.mybatis.mapper.EmployeeMapperAnnotation;
 import com.moralok.mybatis.mapper.EmployeeMapperPlus;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -27,6 +26,20 @@ public class MapperPlusTest {
             EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
             Employee employee = mapper.getEmployeeById(1);
             System.out.println(employee);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void resultMapWithAnotherTest() throws IOException {
+        // 级联属性封装
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            Employee employee = mapper.getEmployeeAndDeptById(1);
+            System.out.println(employee);
+            System.out.println(employee.getDept());
         } catch (Exception e) {
             e.printStackTrace();
         }

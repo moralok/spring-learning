@@ -10,8 +10,15 @@ public interface EmployeeMapperPlus {
 
     /**
      * 查询
-     * @param id
-     * @return
+     * @param id id
+     * @return employee
      */
     Employee getEmployeeById(Integer id);
+
+    /**
+     * 查询
+     * @param id id
+     * @return employee
+     */
+    Employee getEmployeeAndDeptById(Integer id);
 }

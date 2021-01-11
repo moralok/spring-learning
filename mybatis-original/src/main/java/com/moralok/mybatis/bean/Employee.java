@@ -17,6 +17,8 @@ public class Employee {
 
     private String email;
 
+    private Department dept;
+
     public Employee() {
     }
 
@@ -57,6 +59,14 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Department getDept() {
+        return dept;
+    }
+
+    public void setDept(Department dept) {
+        this.dept = dept;
     }
 
     @Override
