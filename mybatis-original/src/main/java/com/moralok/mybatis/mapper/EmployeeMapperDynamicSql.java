@@ -1,8 +1,20 @@
 package com.moralok.mybatis.mapper;
 
+import com.moralok.mybatis.bean.Employee;
+
+import java.util.List;
+
 /**
  * @author moralok
  * @since 2021/1/11 4:56 下午
  */
 public interface EmployeeMapperDynamicSql {
+
+    /**
+     * 查询
+     *
+     * @param employee 条件
+     * @return
+     */
+    List<Employee> listEmployeeByCondition(Employee employee);
 }

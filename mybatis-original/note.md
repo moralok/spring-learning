@@ -211,7 +211,7 @@ Mybatis可以使用鉴别器判断某一列的值，然后根据某列的值改�
 
 ### 动态SQL
 
-OGNL，类似JSJL。
+OGNL表达式，类似JSJL。特殊符号使用转义字符。
 
 - if
 - choose
