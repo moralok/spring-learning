@@ -198,3 +198,9 @@ insert 获取自增主键（Statement.getGeneratedKeys）
 
 1. 指定column时需要多个参数：column="{key1=column1,key2=column2}"，比如column="{deptId=id}"
 2. fetchType="lazy"，默认为延迟加载。在开启全局的延迟加载后，仍然可以指定为立即加载。
+
+##### 鉴别器 discriminator
+
+Mybatis可以使用鉴别器判断某一列的值，然后根据某列的值改变封装行为。
+
+场景举例：如果员工为女生，把部门信息查出来；如果是男生，把lastName赋值给email

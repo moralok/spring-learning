@@ -41,6 +41,27 @@
         </association>
     </resultMap>
 
+    <resultMap id="MyEmpDiscriminator" type="com.moralok.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <discriminator javaType="boolean" column="gender">
+            <case value="false" resultType="com.moralok.mybatis.bean.Employee">
+                <association property="dept"
+                             select="com.moralok.mybatis.mapper.DepartmentMapper.getDeptById" column="id">
+                </association>
+            </case>
+            <case value="true" resultType="com.moralok.mybatis.bean.Employee">
+                <id column="id" property="id"/>
+                <result column="last_name" property="lastName"/>
+                <result column="gender" property="gender"/>
+                <result column="last_name" property="email"/>
+            </case>
+        </discriminator>
+
+    </resultMap>
+
     <select id="getEmployeeById" resultMap="MyEmp">
         select * from tbl_employee where id = #{id}
     </select>
@@ -55,6 +76,9 @@
         where e.d_id = d.id and e.id = #{id}
     </select>
     <select id="getEmployeeAndDeptStep" resultMap="MyEmpWithDeptStep">
+        select * from tbl_employee where id = #{id}
+    </select>
+    <select id="getEmployeeByIdWithDiscriminator" resultMap="MyEmpDiscriminator">
         select * from tbl_employee where id = #{id}
     </select>
 </mapper>

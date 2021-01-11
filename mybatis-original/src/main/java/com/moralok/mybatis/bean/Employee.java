@@ -76,6 +76,7 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", gender=" + gender +
                 ", email='" + email + '\'' +
+                ", dept=" + dept +
                 '}';
     }
 }

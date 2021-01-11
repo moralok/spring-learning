@@ -108,6 +108,20 @@ public class MapperPlusTest {
         }
     }
 
+    @Test
+    void discriminatorTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            Employee employee = mapper.getEmployeeByIdWithDiscriminator(1);
+            System.out.println(employee);
+            employee = mapper.getEmployeeByIdWithDiscriminator(2);
+            System.out.println(employee);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "com/moralok/mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
