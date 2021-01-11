@@ -24,7 +24,7 @@ public class DynamicSqlTest {
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
-            Employee employee = new Employee(1, "%o%", null ,null);
+            Employee employee = new Employee(null, "%o%", null ,null);
             List<Employee> employees = mapper.listEmployeeByCondition(employee);
             System.out.println(employees);
         } catch (Exception e) {

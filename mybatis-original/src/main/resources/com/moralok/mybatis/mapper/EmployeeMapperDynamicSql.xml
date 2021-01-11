@@ -7,7 +7,7 @@
     <select id="listEmployeeByCondition" resultType="com.moralok.mybatis.bean.Employee">
         select *
         from tbl_employee
-        where
+        <where>
           <if test="id != null">
               id = #{id}
           </if>
@@ -20,5 +20,6 @@
           <if test="email != null and email.trim() != ''">
               and email = #{email}
           </if>
+        </where>
     </select>
 </mapper>
