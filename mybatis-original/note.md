@@ -194,3 +194,7 @@ insert 获取自增主键（Statement.getGeneratedKeys）
             2. 使用延迟加载，部门信息在使用的时候再查询（默认toString也会触发）
 3. 一对多关联，使用collection(ofType、select、column)
     
+##### association和collection扩展
+
+1. 指定column时需要多个参数：column="{key1=column1,key2=column2}"，比如column="{deptId=id}"
+2. fetchType="lazy"，默认为延迟加载。在开启全局的延迟加载后，仍然可以指定为立即加载。
