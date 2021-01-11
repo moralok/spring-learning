@@ -84,4 +84,12 @@ public interface EmployeeMapper {
      */
     @MapKey("lastName")
     Map<String, Employee> listEmployeeByLastNameReturnMap(String lastName);
+
+    /**
+     * 查询
+     *
+     * @param deptId 部门ID
+     * @return 员工
+     */
+    List<Employee> listEmployeesByDeptId(Integer deptId);
 }

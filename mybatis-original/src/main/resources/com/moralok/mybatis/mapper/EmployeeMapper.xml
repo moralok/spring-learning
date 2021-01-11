@@ -42,4 +42,7 @@
     <select id="listEmployeeByLastNameReturnMap" resultType="com.moralok.mybatis.bean.Employee">
         select * from tbl_employee where last_name like #{lastName}
     </select>
+    <select id="listEmployeesByDeptId" resultType="com.moralok.mybatis.bean.Employee">
+        select * from tbl_employee where d_id = #{deptId}
+    </select>
 </mapper>

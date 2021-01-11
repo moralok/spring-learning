@@ -179,15 +179,18 @@ insert 获取自增主键（Statement.getGeneratedKeys）
     - type，封装Java类型
     - 不指定的列也会自动封装，但是推荐全写上Depart
     
-- 普通映射，column、property、type
-- 级联映射，用.分隔
-- 使用association，property、javaType
-    - 嵌套结果集
-    - 分步查询 select指定查询方法、column指定传哪一列的值(如果需association里要映射怎么处理)
-        1. 先按id查询员工信息
-        2. 根据员工d_id查询部门信息
-        3. 部门设置到员工信息中
-    - 分步查询的优势
-        1. 组合已有的查询
-        2. 使用延迟加载，部门信息在使用的时候再查询（默认toString也会触发）
-            
+1. 普通查询
+    - 普通映射，column、property、type
+2. 一对一关联
+    - 级联映射，用.分隔
+    - 使用association，property、javaType
+        - 嵌套结果集
+        - 分步查询 select指定查询方法、column指定传哪一列的值(如果需association里要映射怎么处理)
+            1. 先按id查询员工信息
+            2. 根据员工d_id查询部门信息
+            3. 部门设置到员工信息中
+        - 分步查询的优势
+            1. 组合已有的查询
+            2. 使用延迟加载，部门信息在使用的时候再查询（默认toString也会触发）
+3. 一对多关联，使用collection(ofType、select、column)
+    
