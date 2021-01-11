@@ -204,3 +204,16 @@ insert 获取自增主键（Statement.getGeneratedKeys）
 Mybatis可以使用鉴别器判断某一列的值，然后根据某列的值改变封装行为。
 
 场景举例：如果员工为女生，把部门信息查出来；如果是男生，把lastName赋值给email
+
+- javaType：指定列的Java类型
+- column：指定列名
+- case：resultType不能少
+
+### 动态SQL
+
+OGNL，类似JSJL。
+
+- if
+- choose
+- trim
+- foreach
