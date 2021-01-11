@@ -33,4 +33,11 @@ public interface EmployeeMapperDynamicSql {
      * @return
      */
     List<Employee> listEmployeeByConditionChoose(Employee employee);
+
+    /**
+     * 更新
+     *
+     * @param employee
+     */
+    void updateEmployeeWithSet(Employee employee);
 }

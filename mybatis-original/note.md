@@ -234,3 +234,7 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 
 ##### choose(when、otherwise)
 场景描述：如果带了id就用id查询，如果带了lastName就用lastName查询。
+
+##### set与if结合进行更新
+不为null才进行更新。
+也可以使用trim进行操作。
