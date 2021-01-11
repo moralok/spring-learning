@@ -166,3 +166,14 @@ insert 获取自增主键（Statement.getGeneratedKeys）
 ##### select返回封装map
 1. 返回一条记录的map，key就是列名，值就是对应的值
 2. 多条记录封装map，使用@MapKey("id")指定key
+
+##### select指定resultMap
+
+1. 全局setting设置
+    - autoMappingBehavior默认是PARTIAL
+    - mapUnderscoreToCamelCase
+2. resultMap，实现高级结果集映射，和resultType二选一
+    - id，定义主键底层会有优化
+    - column，指定哪一列
+    - property，指定对应的JavaBean属性
+    - 不指定的列也会自动封装，但是推荐全写上
