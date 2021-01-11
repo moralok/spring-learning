@@ -6,6 +6,11 @@
     <properties resource="db_config.properties"/>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--显示指定需要的属性、防止版本更替的影响-->
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--一旦使用一个延迟加载的属性，其他的也都要加载；禁用则按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
     <typeAliases>
         <!--<typeAlias type="com.moralok.mybatis.bean.Employee" alias="employee"/>-->

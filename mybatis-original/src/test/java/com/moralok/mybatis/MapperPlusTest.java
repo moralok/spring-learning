@@ -66,8 +66,10 @@ public class MapperPlusTest {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
             Employee employee = mapper.getEmployeeAndDeptStep(1);
-            System.out.println(employee);
-            System.out.println(employee.getDept());
+            // System.out.println(employee);
+            // System.out.println(employee.getDept());
+            // 测试延迟加载，默认toString也会触发
+            System.out.println(employee.getLastName());
         } catch (Exception e) {
             e.printStackTrace();
         }
