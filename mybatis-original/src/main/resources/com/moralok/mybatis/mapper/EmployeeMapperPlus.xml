@@ -31,6 +31,16 @@
         </association>
     </resultMap>
 
+    <resultMap id="MyEmpWithDeptStep" type="com.moralok.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <association property="dept"
+                     select="com.moralok.mybatis.mapper.DepartmentMapper.getDeptById" column="d_id">
+        </association>
+    </resultMap>
+
     <select id="getEmployeeById" resultMap="MyEmp">
         select * from tbl_employee where id = #{id}
     </select>
@@ -43,5 +53,8 @@
         select e.id, e.last_name, e.gender, e.email, e.d_id, d.dept_name
         from tbl_employee e, tbl_dept d
         where e.d_id = d.id and e.id = #{id}
+    </select>
+    <select id="getEmployeeAndDeptStep" resultMap="MyEmpWithDeptStep">
+        select * from tbl_employee where id = #{id}
     </select>
 </mapper>

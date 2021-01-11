@@ -59,6 +59,20 @@ public class MapperPlusTest {
         }
     }
 
+    @Test
+    void resultMapAssociationStep() throws IOException {
+        // 级联属性封装(association)
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+            Employee employee = mapper.getEmployeeAndDeptStep(1);
+            System.out.println(employee);
+            System.out.println(employee.getDept());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "com/moralok/mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);

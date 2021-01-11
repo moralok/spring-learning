@@ -182,3 +182,8 @@ insert 获取自增主键（Statement.getGeneratedKeys）
 - 普通映射，column、property、type
 - 级联映射，用.分隔
 - 使用association，property、javaType
+    - 嵌套结果集
+    - 分步查询 select指定查询方法、column指定传哪一列的值(如果需association里要映射怎么处理)
+        1. 先按id查询员工信息
+        2. 根据员工d_id查询部门信息
+        3. 部门设置到员工信息中

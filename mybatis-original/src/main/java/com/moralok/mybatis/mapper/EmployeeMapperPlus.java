@@ -28,4 +28,11 @@ public interface EmployeeMapperPlus {
      * @return employee
      */
     Employee getEmployeeAndDeptById2(Integer id);
+
+    /**
+     * 使用association分步查询
+     * @param id id
+     * @return employee
+     */
+    Employee getEmployeeAndDeptStep(Integer id);
 }
