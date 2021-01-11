@@ -44,6 +44,19 @@ public class DynamicSqlTest {
         }
     }
 
+    @Test
+    void chooseTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
+            Employee employee = new Employee(null, null, null ,null);
+            List<Employee> employees = mapper.listEmployeeByConditionChoose(employee);
+            System.out.println(employees);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "com/moralok/mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);

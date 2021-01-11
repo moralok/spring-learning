@@ -40,4 +40,21 @@
             </if>
         </trim>
     </select>
+    <select id="listEmployeeByConditionChoose" resultType="com.moralok.mybatis.bean.Employee">
+        select *
+        from tbl_employee
+        <where>
+            <choose>
+                <when test="id != null">
+                    id = #{id}
+                </when>
+                <when test="lastName != null">
+                    last_name = #{lastName}
+                </when>
+                <when test="email != null">
+                    email = #{email}
+                </when>
+            </choose>
+        </where>
+    </select>
 </mapper>

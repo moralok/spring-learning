@@ -222,7 +222,7 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 缺点：拼接完前后可能有多余
 
 ##### where
-不要使用1=1，使用where标签。where会将拼装sql中多余的and或者or移除。
+不要使用1=1，使用where标签。where会将拼装sql中多余的and或者or移除。如果where中没有内容，不会拼接where。
 
 缺点：有人会将and放在语句结尾（不要这么写不就好了。。。）
 
@@ -231,3 +231,6 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 - prefixOverrides：覆盖前缀
 - suffix：加后缀
 - suffixOverrides：覆盖后缀
+
+##### choose(when、otherwise)
+场景描述：如果带了id就用id查询，如果带了lastName就用lastName查询。

@@ -25,4 +25,12 @@ public interface EmployeeMapperDynamicSql {
      * @return
      */
     List<Employee> listEmployeeByConditionTrim(Employee employee);
+
+    /**
+     * 查询
+     *
+     * @param employee 条件
+     * @return
+     */
+    List<Employee> listEmployeeByConditionChoose(Employee employee);
 }
