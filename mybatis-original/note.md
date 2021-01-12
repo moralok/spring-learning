@@ -262,3 +262,8 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
     - 多个参数，代表封装起来的map
 - _databaseId，如果配置了databaseIdProvider标签，databaseId就是代表当前数据库的别名
 
+##### bind绑定参数值
+场景：模糊查询拼接%（仍然推荐先拼接好再传入）
+
+- 使用$拼接不安全
+- bind(name、value)

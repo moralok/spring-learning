@@ -100,4 +100,8 @@
             or last_name = #{_databaseId}
         </where>
     </select>
+    <select id="listEmployeeUseBind" resultType="com.moralok.mybatis.bean.Employee">
+        <bind name="_lastName" value="'%' + lastName + '%'"/>
+        select * from tbl_employee where last_name like #{_lastName}
+    </select>
 </mapper>

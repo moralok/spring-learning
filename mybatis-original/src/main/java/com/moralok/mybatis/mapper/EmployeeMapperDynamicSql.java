@@ -67,4 +67,11 @@ public interface EmployeeMapperDynamicSql {
      * @return
      */
     List<Employee> listEmployeeByInnerParameter(Employee employee);
+
+    /**
+     * bind
+     * @param employee 员工
+     * @return
+     */
+    List<Employee> listEmployeeUseBind(Employee employee);
 }
