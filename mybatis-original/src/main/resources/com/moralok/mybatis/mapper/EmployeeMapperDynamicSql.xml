@@ -102,6 +102,13 @@
     </select>
     <select id="listEmployeeUseBind" resultType="com.moralok.mybatis.bean.Employee">
         <bind name="_lastName" value="'%' + lastName + '%'"/>
-        select * from tbl_employee where last_name like #{_lastName}
+        select
+        <include refid="innerColumn">
+            <property name="emailColumn" value="email"/>
+        </include>
+        from tbl_employee where last_name like #{_lastName}
     </select>
+    <sql id="innerColumn">
+        id, last_name, gender, ${emailColumn}
+    </sql>
 </mapper>
