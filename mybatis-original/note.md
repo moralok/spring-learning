@@ -247,3 +247,9 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 - close: 给遍历出的结果拼接一个结束的字符
 - index: 索引。遍历list时是索引，遍历map时是key
 - 取值，#{变量名}
+
+1. 批量查询
+2. 批量添加
+3. 批量分步添加
+    - MySQLSyntaxErrorException
+    - 需要数据库连接属性allowMultiQueries=true支持

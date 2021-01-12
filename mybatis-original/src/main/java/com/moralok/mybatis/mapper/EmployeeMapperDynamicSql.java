@@ -48,4 +48,16 @@ public interface EmployeeMapperDynamicSql {
      * @return list
      */
     List<Employee> listEmployeeByIds(@Param("ids") List<Integer> ids);
+
+    /**
+     * 批量添加员工
+     * @param employees 员工
+     */
+    void addEmployees(@Param("employees") List<Employee> employees);
+
+    /**
+     * 批量添加员工
+     * @param employees 员工
+     */
+    void addEmployeesStep(@Param("employees") List<Employee> employees);
 }

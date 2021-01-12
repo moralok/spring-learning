@@ -1,5 +1,6 @@
 package com.moralok.mybatis;
 
+import com.moralok.mybatis.bean.Department;
 import com.moralok.mybatis.bean.Employee;
 import com.moralok.mybatis.mapper.EmployeeMapperDynamicSql;
 import org.apache.ibatis.io.Resources;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,6 +82,36 @@ public class DynamicSqlTest {
             for (Employee e : employees) {
                 System.out.println(e);
             }
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void foreachAddTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
+            List<Employee> employees = new ArrayList<>();
+            employees.add(new Employee(null, "smith", true, "smith@gmail.com", new Department(1)));
+            employees.add(new Employee(null, "allen", false, "allen@gmail.com", new Department(2)));
+            mapper.addEmployees(employees);
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void foreachAddStepTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
+            List<Employee> employees = new ArrayList<>();
+            employees.add(new Employee(null, "smith", true, "smith@gmail.com", new Department(1)));
+            employees.add(new Employee(null, "allen", false, "allen@gmail.com", new Department(2)));
+            mapper.addEmployeesStep(employees);
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();

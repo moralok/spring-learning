@@ -14,6 +14,13 @@ public class Department {
 
     private List<Employee> employees;
 
+    public Department() {
+    }
+
+    public Department(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

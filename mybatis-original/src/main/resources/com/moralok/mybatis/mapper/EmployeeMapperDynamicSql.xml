@@ -3,6 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moralok.mybatis.mapper.EmployeeMapperDynamicSql">
+    <insert id="addEmployees">
+        insert into tbl_employee (last_name, gender, email, d_id)
+        values
+        <foreach collection="employees" item="emp" separator=",">
+            (#{emp.lastName}, #{emp.gender}, #{emp.email}, #{emp.dept.id})
+        </foreach>
+    </insert>
+    <insert id="addEmployeesStep">
+        <foreach collection="employees" item="emp" separator=";">
+            insert into tbl_employee (last_name, gender, email, d_id)
+            values (#{emp.lastName}, #{emp.gender}, #{emp.email}, #{emp.dept.id})
+        </foreach>
+    </insert>
     <update id="updateEmployeeWithSet">
         update tbl_employee
         <set>
