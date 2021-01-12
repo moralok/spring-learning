@@ -253,3 +253,12 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 3. 批量分步添加
     - MySQLSyntaxErrorException
     - 需要数据库连接属性allowMultiQueries=true支持
+
+##### 两个内置参数
+
+不只是方法传递过来的参数可以被用来判断或者取值，Mybatis默认还有两个内置参数（需要通过OGNL使用呀，There is no getter for property named '_parameter'，没人提这回事吗）：
+- _parameter
+    - 单个参数，代表该参数
+    - 多个参数，代表封装起来的map
+- _databaseId，如果配置了databaseIdProvider标签，databaseId就是代表当前数据库的别名
+

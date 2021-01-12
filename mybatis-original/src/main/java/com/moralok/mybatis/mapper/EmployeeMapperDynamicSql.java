@@ -60,4 +60,11 @@ public interface EmployeeMapperDynamicSql {
      * @param employees 员工
      */
     void addEmployeesStep(@Param("employees") List<Employee> employees);
+
+    /**
+     * 使用内置参数
+     * @param employee 员工
+     * @return
+     */
+    List<Employee> listEmployeeByInnerParameter(Employee employee);
 }

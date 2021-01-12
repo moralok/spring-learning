@@ -91,4 +91,13 @@
             #{itemId}
         </foreach>
     </select>
+    <select id="listEmployeeByInnerParameter" resultType="com.moralok.mybatis.bean.Employee">
+        select * from tbl_employee
+        <where>
+            <if test="_parameter != null">
+                and id = #{_parameter.id}
+            </if>
+            or last_name = #{_databaseId}
+        </where>
+    </select>
 </mapper>
