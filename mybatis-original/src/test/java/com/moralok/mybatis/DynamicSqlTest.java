@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,12 +59,27 @@ public class DynamicSqlTest {
     }
 
     @Test
-    void SetIfTest() throws IOException {
+    void setIfTest() throws IOException {
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
             Employee employee = new Employee(3, null, true ,null);
             mapper.updateEmployeeWithSet(employee);
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void foreachTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            EmployeeMapperDynamicSql mapper = sqlSession.getMapper(EmployeeMapperDynamicSql.class);
+            List<Employee> employees = mapper.listEmployeeByIds(Arrays.asList(1, 2, 3, 4));
+            for (Employee e : employees) {
+                System.out.println(e);
+            }
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();

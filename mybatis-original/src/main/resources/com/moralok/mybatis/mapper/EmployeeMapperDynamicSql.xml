@@ -72,4 +72,10 @@
             </choose>
         </where>
     </select>
+    <select id="listEmployeeByIds" resultType="com.moralok.mybatis.bean.Employee">
+        select * from tbl_employee where id in
+        <foreach collection="ids" item="itemId" separator="," open="(" close=")">
+            #{itemId}
+        </foreach>
+    </select>
 </mapper>

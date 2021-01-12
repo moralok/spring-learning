@@ -238,3 +238,12 @@ OGNL表达式，类似JSJL。特殊符号使用转义字符。
 ##### set与if结合进行更新
 不为null才进行更新。
 也可以使用trim进行操作。
+
+##### foreach
+- collection: 指定要遍历的集合，list类型的参数会特殊处理封装在map中，map的key就叫list 
+- item: 将当前遍历到的元素赋值给指定变量
+- separator: 每个元素之间的分隔符
+- open: 给遍历出的结果拼接一个开始的字符
+- close: 给遍历出的结果拼接一个结束的字符
+- index: 索引。遍历list时是索引，遍历map时是key
+- 取值，#{变量名}

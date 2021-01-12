@@ -1,6 +1,7 @@
 package com.moralok.mybatis.mapper;
 
 import com.moralok.mybatis.bean.Employee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -40,4 +41,11 @@ public interface EmployeeMapperDynamicSql {
      * @param employee
      */
     void updateEmployeeWithSet(Employee employee);
+
+    /**
+     * 查询
+     * @param ids ids
+     * @return list
+     */
+    List<Employee> listEmployeeByIds(@Param("ids") List<Integer> ids);
 }
