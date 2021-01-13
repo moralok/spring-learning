@@ -323,14 +323,21 @@ Mybatis系统中默认定义了两级缓存：
         - STATEMENT：相当于禁用一级缓存，在Session中不共享数据
         
 ##### 缓存原理图示
-数据库
-sqlSession【一级缓存】、sqlSession【一级缓存】、sqlSession【一级缓存】、sqlSession【一级缓存】
-namespace1【二级缓存】、namespace2【二级缓存】
+- 数据库
+- sqlSession【一级缓存】、sqlSession【一级缓存】、sqlSession【一级缓存】、sqlSession【一级缓存】
+- namespace1【二级缓存】、namespace2【二级缓存】
 
-新会话->二级缓存（->一级缓存）（->数据库）->用户
+- 过程：新会话->二级缓存（->一级缓存）（->数据库）->用户
 
-Cache
+- Cache
     - PerpetualCache
     - SerializedCache
     - LruCache
     - etc.
+    
+- 整合第三方（如Redis）做二级缓存
+    - 实现Cache接口（应该要学会自己写吧）
+    - 简便方式
+        - 引用官方适配包
+        - 配置redis信息
+        - 没有密码属性有点坑啊，可能是我没找到
