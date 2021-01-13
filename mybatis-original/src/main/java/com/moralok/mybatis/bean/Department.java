@@ -1,12 +1,13 @@
 package com.moralok.mybatis.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author moralok
  * @since 2021/1/11 2:42 下午
  */
-public class Department {
+public class Department implements Serializable {
 
     private Integer id;
 

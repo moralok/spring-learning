@@ -61,6 +61,24 @@ public class CacheTest {
         }
     }
 
+    @Test
+    void secondLevelCacheTest() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        try (SqlSession sqlSession = sqlSessionFactory.openSession(); SqlSession sqlSession2 = sqlSessionFactory.openSession()) {
+            EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+            Employee employee = mapper.getEmployeeById(1);
+            System.out.println(employee);
+            sqlSession.commit();
+            EmployeeMapper mapper2 = sqlSession2.getMapper(EmployeeMapper.class);
+            Employee employee2 = mapper2.getEmployeeById(1);
+            sqlSession2.commit();
+            System.out.println(employee2);
+            System.out.println(employee == employee2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "com/moralok/mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
