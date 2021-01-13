@@ -73,6 +73,9 @@ public class CacheTest {
             sqlSession.commit();
             EmployeeMapper mapper2 = sqlSession2.getMapper(EmployeeMapper.class);
             Employee employee2 = mapper2.getEmployeeById(1);
+            // 第二次会从二级缓存还是一级缓存取呢
+            System.out.println("二级缓存得到数据后，会放在一级缓存吗？看结果是去二级缓存了");
+            Employee employee3 = mapper2.getEmployeeById(1);
             sqlSession2.commit();
             System.out.println(employee2);
             System.out.println(employee == employee2);
