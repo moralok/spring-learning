@@ -312,4 +312,13 @@ Mybatis系统中默认定义了两级缓存：
             - type: 指定自定义缓存的全类名【实现Cache接口】
         3. POJO需要实现序列化接口
     - sqlSession提交或者关闭才会保存到二级缓存中
+- 和缓存有关的设置/属性
+    1. cacheEnabled（默认true）: 只能关闭二级缓存；不能关闭一级缓存
+    2. 每个select标签都有useCache标签（默认true）: 只能关闭二级缓存；不能关闭一级缓存
+    3. 每个增删改标签都有flushCache标签（默认true）: 每次执行后都会清空缓存，一二级缓存都会清空
+    4. 每个select标签中都有flushCache标签（默认为false）: 每次查询之前都会清空缓存（分前后两种清空吗？？？）
+    5. sqlSession.clearCache() 只会清空sqlSession的一级缓存
+    6. localCacheScope【本地缓存作用域】，3.3版本之后有
+        - SESSION
+        - STATEMENT：相当于禁用一级缓存，在Session中不共享数据
         

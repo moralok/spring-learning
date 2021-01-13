@@ -29,11 +29,13 @@ public class CacheTest {
             // 不会执行SQL
             // 如果执行过修改，缓存失效
             // 如果主动清理缓存，缓存失效
-            // mapper.addEmployee(new Employee(null, "Jerry", true, "Jerry@gmail.com", new Department(2)));
-            sqlSession.clearCache();
+            mapper.addEmployee(new Employee(null, "Jerry", true, "Jerry@gmail.com", new Department(2)));
+            // sqlSession.clearCache();
             Employee employee2 = mapper.getEmployeeById(1);
-            System.out.println(employee);
+            System.out.println(employee2);
             System.out.println(employee == employee2);
+            Employee employee3 = mapper.getEmployeeById(1);
+            System.out.println(employee2);
         } catch (Exception e) {
             e.printStackTrace();
         }
