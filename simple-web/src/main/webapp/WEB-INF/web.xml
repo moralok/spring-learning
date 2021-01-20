@@ -1,0 +1,30 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<!--部署文件 DD-->
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--上下文初始化参数-->
+  <context-param>
+    <param-name>breed</param-name>
+    <param-value>Great Dane</param-value>
+  </context-param>
+
+  <!--上下文监听者-->
+  <listener>
+    <listener-class>com.moralok.servlet.listener.MyServletContextListener</listener-class>
+  </listener>
+
+  <!--servlet 映射-->
+  <servlet>
+    <servlet-name>ListenerTest</servlet-name>
+    <servlet-class>com.moralok.servlet.ListenerTest</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ListenerTest</servlet-name>
+    <url-pattern>/ListenerTest</url-pattern>
+  </servlet-mapping>
+
+</web-app>
