@@ -22,6 +22,10 @@
     <servlet-class>com.moralok.servlet.servlet.Ch1Servlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>Ch3 Servlet</servlet-name>
+    <servlet-class>com.moralok.servlet.servlet.BeerSelect</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>ListenerTest</servlet-name>
     <servlet-class>com.moralok.servlet.ListenerTest</servlet-class>
   </servlet>
@@ -29,6 +33,10 @@
   <servlet-mapping>
     <servlet-name>Ch1 Servlet</servlet-name>
     <url-pattern>/Ch1Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Ch3 Servlet</servlet-name>
+    <url-pattern>/SelectBeer.do</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ListenerTest</servlet-name>
