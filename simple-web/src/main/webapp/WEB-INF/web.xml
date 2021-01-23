@@ -18,10 +18,18 @@
 
   <!--servlet 映射-->
   <servlet>
+    <servlet-name>Ch1 Servlet</servlet-name>
+    <servlet-class>com.moralok.servlet.servlet.Ch1Servlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>ListenerTest</servlet-name>
     <servlet-class>com.moralok.servlet.ListenerTest</servlet-class>
   </servlet>
 
+  <servlet-mapping>
+    <servlet-name>Ch1 Servlet</servlet-name>
+    <url-pattern>/Ch1Servlet</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ListenerTest</servlet-name>
     <url-pattern>/ListenerTest</url-pattern>
