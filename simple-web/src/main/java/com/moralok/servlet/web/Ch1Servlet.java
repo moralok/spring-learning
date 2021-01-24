@@ -1,4 +1,4 @@
-package com.moralok.servlet.servlet;
+package com.moralok.servlet.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -19,11 +19,15 @@
   <!--servlet 映射-->
   <servlet>
     <servlet-name>Ch1 Servlet</servlet-name>
-    <servlet-class>com.moralok.servlet.servlet.Ch1Servlet</servlet-class>
+    <servlet-class>com.moralok.servlet.web.Ch1Servlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Ch3 Servlet</servlet-name>
-    <servlet-class>com.moralok.servlet.servlet.BeerSelect</servlet-class>
+    <servlet-class>com.moralok.servlet.web.BeerSelect</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Ch4 RequestTest</servlet-name>
+    <servlet-class>com.moralok.servlet.web.HttpServletRequestTest</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ListenerTest</servlet-name>
@@ -37,6 +41,10 @@
   <servlet-mapping>
     <servlet-name>Ch3 Servlet</servlet-name>
     <url-pattern>/SelectBeer.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Ch4 RequestTest</servlet-name>
+    <url-pattern>/RequestTest</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ListenerTest</servlet-name>
