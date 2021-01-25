@@ -1,4 +1,6 @@
-package com.moralok.servlet;
+package com.moralok.servlet.web;
+
+import com.moralok.servlet.Dog;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
