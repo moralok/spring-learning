@@ -30,6 +30,10 @@
     <servlet-class>com.moralok.servlet.web.HttpServletRequestTest</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>Ch4 DownloadCsv</servlet-name>
+    <servlet-class>com.moralok.servlet.web.DownloadCsv</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>ListenerTest</servlet-name>
     <servlet-class>com.moralok.servlet.ListenerTest</servlet-class>
   </servlet>
@@ -45,6 +49,10 @@
   <servlet-mapping>
     <servlet-name>Ch4 RequestTest</servlet-name>
     <url-pattern>/RequestTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Ch4 DownloadCsv</servlet-name>
+    <url-pattern>/DownloadCsv</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ListenerTest</servlet-name>
