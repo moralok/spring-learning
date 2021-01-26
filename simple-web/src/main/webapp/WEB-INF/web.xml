@@ -15,6 +15,12 @@
   <listener>
     <listener-class>com.moralok.servlet.listener.MyServletContextListener</listener-class>
   </listener>
+  <listener>
+    <listener-class>com.moralok.servlet.listener.SessionCounter</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.moralok.servlet.listener.MyHttpSessionAttributeListener</listener-class>
+  </listener>
 
   <!--servlet 映射-->
   <servlet>

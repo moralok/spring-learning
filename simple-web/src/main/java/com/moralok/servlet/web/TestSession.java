@@ -24,6 +24,7 @@ public class TestSession extends HttpServlet {
         } else {
             System.out.println("这是一个旧的会话");
         }
+        session.setMaxInactiveInterval(10);
 
         String myName = (String) session.getAttribute("myName");
         System.out.println("myName: " + myName);
@@ -32,5 +33,7 @@ public class TestSession extends HttpServlet {
         session.setAttribute("myName", now.toString());
         session.setAttribute("dog", new Dog("A Dog"));
         session.removeAttribute("dog");
+        session.setAttribute("replace", "1");
+        session.setAttribute("replace", "2");
     }
 }
