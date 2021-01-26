@@ -46,6 +46,14 @@
     </init-param>
   </servlet>
   <servlet>
+    <servlet-name>Ch6 TestSession</servlet-name>
+    <servlet-class>com.moralok.servlet.web.TestSession</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Ch6 TestCookie</servlet-name>
+    <servlet-class>com.moralok.servlet.web.TestCookie</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>ListenerTest</servlet-name>
     <servlet-class>com.moralok.servlet.web.ListenerTest</servlet-class>
   </servlet>
@@ -69,6 +77,14 @@
   <servlet-mapping>
     <servlet-name>Ch5 TestInitParams</servlet-name>
     <url-pattern>/TestInitParams</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Ch6 TestSession</servlet-name>
+    <url-pattern>/TestSession</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Ch6 TestCookie</servlet-name>
+    <url-pattern>/TestCookie</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ListenerTest</servlet-name>
