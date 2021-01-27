@@ -11,6 +11,24 @@
     <param-value>Great Dane</param-value>
   </context-param>
 
+  <filter>
+    <filter-name>Ch13 Filter</filter-name>
+    <filter-class>com.moralok.servlet.filter.RequestFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>Ch13 CompressionFilter</filter-name>
+    <filter-class>com.moralok.servlet.filter.CompressionFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Ch13 Filter</filter-name>
+    <servlet-name>Ch1 Servlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>Ch13 CompressionFilter</filter-name>
+    <servlet-name>Ch13 Compression</servlet-name>
+  </filter-mapping>
+
   <!--上下文监听者-->
   <listener>
     <listener-class>com.moralok.servlet.listener.MyServletContextListener</listener-class>
@@ -21,16 +39,6 @@
   <listener>
     <listener-class>com.moralok.servlet.listener.MyHttpSessionAttributeListener</listener-class>
   </listener>
-
-  <filter>
-    <filter-name>Ch13 Filter</filter-name>
-    <filter-class>com.moralok.servlet.filter.RequestFilter</filter-class>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>Ch13 Filter</filter-name>
-    <servlet-name>Ch1 Servlet</servlet-name>
-  </filter-mapping>
 
   <!--servlet 映射-->
   <servlet>
@@ -73,6 +81,10 @@
     <servlet-name>ListenerTest</servlet-name>
     <servlet-class>com.moralok.servlet.web.ListenerTest</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Ch13 Compression</servlet-name>
+    <servlet-class>com.moralok.servlet.web.Ch13Compression</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Ch1 Servlet</servlet-name>
@@ -105,6 +117,10 @@
   <servlet-mapping>
     <servlet-name>ListenerTest</servlet-name>
     <url-pattern>/ListenerTest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Ch13 Compression</servlet-name>
+    <url-pattern>/Compression</url-pattern>
   </servlet-mapping>
 
 </web-app>
