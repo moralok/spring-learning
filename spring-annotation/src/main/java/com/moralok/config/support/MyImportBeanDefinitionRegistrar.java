@@ -15,7 +15,7 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
 
     /**
      * AnnotationMetadata：当前类的注解信息
-     * BeanDefinitionRegistry：BeanDefinition注册类
+     * BeanDefinitionRegistry：BeanDefinition注册类（被传入的，不用想太多）
      *     把需要添加到容器的Bean通过BeanDefinitionRegistry.registerBeanDefinition手动注册
      *
      * @param importingClassMetadata
@@ -23,6 +23,7 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
      */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        // 如果时候来注册的怎么办呢，感觉还是需要关注和把控顺序呀
         boolean hasRed = registry.containsBeanDefinition("com.moralok.bean.Red");
         boolean hasBlue = registry.containsBeanDefinition("com.moralok.bean.Blue");
         if (hasRed && hasBlue) {

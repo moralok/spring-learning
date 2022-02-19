@@ -34,9 +34,9 @@ public class LinuxCondition implements Condition {
         Environment environment = context.getEnvironment();
         // 4. 能获取到Bean定义的注册中心
         BeanDefinitionRegistry registry = context.getRegistry();
-        System.out.println("是否包含Bean bill定义" + registry.containsBeanDefinition("bill"));
-        System.out.println("是否包含Bean linus定义" + registry.containsBeanDefinition("linus"));
-        System.out.println("是否包含Bean jobs定义" + registry.containsBeanDefinition("jobs"));
+        System.out.println("LinuxCondition是否包含Bean bill定义" + registry.containsBeanDefinition("bill"));
+        System.out.println("LinuxCondition是否包含Bean linus定义" + registry.containsBeanDefinition("linus"));
+        System.out.println("LinuxCondition是否包含Bean jobs定义" + registry.containsBeanDefinition("jobs"));
         // 5. 能获取到资源加载器
         ResourceLoader resourceLoader = context.getResourceLoader();
         String property = environment.getProperty("os.name");

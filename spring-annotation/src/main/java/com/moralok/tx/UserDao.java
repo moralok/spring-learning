@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public class UserDao {
 
-    @Autowired
+    @Autowired(required = false)
     private JdbcTemplate jdbcTemplate;
 
     public void insert() {

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
  * @since 2020/12/29 2:06 下午
  */
 @Service
-public class UserService {
+public class AccountService {
 
     @EventListener(classes = ApplicationEvent.class)
     public void listen(ApplicationEvent event) {
-        System.out.println("UserService..监听到 " + event);
+        System.out.println("AccountService..监听到 " + event);
     }
 }

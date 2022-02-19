@@ -20,15 +20,18 @@ import java.io.IOException;
 public class MyTypeFilter implements TypeFilter {
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
+        // 获取当前类注解的信息
         AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
+        // 获取当前类的信息
         ClassMetadata classMetadata = metadataReader.getClassMetadata();
+        // 获取当前类资源（普通类的资源是什么？class 文件）
         Resource resource = metadataReader.getResource();
 
         String className = classMetadata.getClassName();
-        System.out.println("classMetadata.........." + className);
+        System.out.println("classMetadata.........." + className + "  result: " + className.contains("Red"));
         MetadataReader anotherMetadataReader = metadataReaderFactory.getMetadataReader("com.moralok.config.MyTypeFilter");
         String anotherClassName = anotherMetadataReader.getClassMetadata().getClassName();
         System.out.println("annotationMetadata.........." + anotherClassName);
-        return className.contains("er");
+        return className.contains("Red");
     }
 }
