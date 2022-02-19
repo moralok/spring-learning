@@ -5,6 +5,10 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 /**
+ * 要理解 Initializing 指的就是初始化方法，初始化的时机就是实例化和属性赋值后
+ *
+ * Spring底层常见 ApplicationContextAwareProcessor、BeanValidationPostProcessor、InitDestroyAnnotationBeanPostProcessor、AutowiredAnnotationBeanPostProcessor
+ *
  * @author moralok
  * @since 2020/12/18 11:41 上午
  */

@@ -2,7 +2,6 @@ package com.moralok;
 
 import com.moralok.config.LifeCycleConfig;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -11,6 +10,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class LifeCycleTest {
 
+    /**
+     * 注解@PostConstruct早于InitializingBean早于initMethod
+     * 如果是同方法，注解@PostConstruct会覆盖掉initMethod的效果
+     * 不同方法三者还能共存也是醉了啊，只能执行一次，估计有标记
+     *
+     * populateBean（为Bean属性赋值）
+     * initializeBean
+     *      applyBeanPostProcessorsBeforeInitialization
+     *      invokeInitMethods
+     *      applyBeanPostProcessorsAfterInitialization
+     */
     @Test
     public void beanTest() {
         // 1、创建容器
