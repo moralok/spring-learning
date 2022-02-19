@@ -8,12 +8,21 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class Player {
 
+    /**
+     * 基本类型
+     */
     @Value("liudehua")
     private String name;
 
+    /**
+     * SpEL表达式
+     */
     @Value("#{20-2}")
     private Integer age;
 
+    /**
+     * 取出配置文件中的值（严格上说是运行环境中的值，配置文件中的变量也会转化为运行环境中的变量）
+     */
     @Value("${player.nickname}")
     private String nickname;
 
