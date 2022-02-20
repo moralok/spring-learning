@@ -34,7 +34,7 @@ public class LifeCycleConfig {
      *
      * @return
      */
-    @Bean(initMethod = "init1")
+    @Bean(initMethod = "init1", destroyMethod = "destroy1")
     public Cat cat() {
         return new Cat();
     }

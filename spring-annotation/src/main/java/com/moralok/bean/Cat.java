@@ -4,6 +4,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * @author moralok
@@ -19,6 +20,15 @@ public class Cat implements InitializingBean, DisposableBean {
     @Override
     public void destroy() throws Exception {
         System.out.println("Cat destroy……");
+    }
+
+    public void destroy1() throws Exception {
+        System.out.println("Cat destroy1……");
+    }
+
+    @PreDestroy
+    public void destroy2() throws Exception {
+        System.out.println("Cat destroy2……");
     }
 
     @Override
