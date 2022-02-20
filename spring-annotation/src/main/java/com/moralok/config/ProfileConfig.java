@@ -20,6 +20,9 @@ import java.beans.PropertyVetoException;
 @PropertySource("classpath:/db.properties")
 public class ProfileConfig implements EmbeddedValueResolverAware {
 
+    /**
+     * 直接获取配置文件
+     */
     @Value("${db.user}")
     private String user;
 
@@ -38,6 +41,12 @@ public class ProfileConfig implements EmbeddedValueResolverAware {
         return dataSource;
     }
 
+    /**
+     * 参数位置使用@Value
+     * @param password
+     * @return
+     * @throws PropertyVetoException
+     */
     @Profile("test")
     @Bean
     public DataSource dataSourceTest(@Value("${db.password}") String password) throws PropertyVetoException {
@@ -60,6 +69,10 @@ public class ProfileConfig implements EmbeddedValueResolverAware {
         return dataSource;
     }
 
+    /**
+     * 手动解析字符串
+     * @param resolver
+     */
     @Override
     public void setEmbeddedValueResolver(StringValueResolver resolver) {
         this.resolver = resolver;

@@ -9,8 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Car {
 
+    private String name;
+
     public Car() {
         System.out.println("car constructor……");
+        name = "originalName";
     }
 
     public void init() {
@@ -19,5 +22,20 @@ public class Car {
 
     public void destroy() {
         System.out.println("car destroy……");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }
