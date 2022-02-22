@@ -2,6 +2,7 @@ package com.moralok.config;
 
 import com.moralok.aop.LogAspects;
 import com.moralok.aop.MathCalculator;
+import com.moralok.bean.Car;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -34,5 +35,10 @@ public class AopConfig {
     @Bean
     public LogAspects logAspects() {
         return new LogAspects();
+    }
+
+    @Bean
+    public Car car() {
+        return new Car();
     }
 }

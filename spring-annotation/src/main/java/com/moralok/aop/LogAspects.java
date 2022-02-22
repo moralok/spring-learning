@@ -59,7 +59,7 @@ public class LogAspects {
         System.out.println(joinPoint.getSignature().getName() + "除法异常@AfterThrowing。。。异常信息 " + e.getMessage());
     }
 
-    @Around(value = "pointCut()")
+    @Around(value = "execution(public String com.moralok.bean.Car.getName(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println(joinPoint.getSignature().getName() + " @Around开始");
         Object proceed = joinPoint.proceed();
