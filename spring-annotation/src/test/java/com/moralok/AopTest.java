@@ -65,6 +65,23 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *     返回 CGLIB增强的代理对象
  *     以后容器中获取的就是代理对象，执行目标方法时，会调用通知方法
  *
+ * 目标方法运行
+ *     容器中保存了组件的代理对象，对象里保存了详细信息（比如增强器、目标方法等等）
+ *     CglibAopProxy.intercept() 拦截目标方法的执行
+ *     根据ProxyFactory获取目标方法的拦截器链
+ *         List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass);
+ *             List<Object> interceptorList = new ArrayList<Object>(config.getAdvisors().length);
+ *             遍历所有的增强器，转为Interceptor，registry.getInterceptors(advisor)
+ *             如果是MethodInterceptor，直接加入；如果不是，使用适配器转为MethodInterceptor
+ *     如果拦截器链为空，直接执行目标方法
+ *         拦截器就是通知方法被包装为MethodInterceptor
+ *     如果有拦截器链
+ *         把需要执行的目标对象、目标方法、拦截器链等信息传入，创建一个CglibMethodInvocation对象
+ *         并调用proceed方法
+ *     处理返回值 retVal = processReturnType(proxy, target, method, retVal);
+ *     拦截器链触发
+ *
+ *
  *
  *
  *
