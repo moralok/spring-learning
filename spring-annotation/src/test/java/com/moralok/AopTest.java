@@ -81,6 +81,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *     处理返回值 retVal = processReturnType(proxy, target, method, retVal);
  *     拦截器链触发
  *
+ * 拦截器链触发过程
+ *     如果没有拦截器链或者到最后一个拦截器，执行目标方法
+ *     递归，每次索引递增，取出下一个拦截器
+ *     ExposeInvocationInterceptor
+ *       AspectJAfterThrowingAdvice
+ *         AfterReturningAdviceInterceptor
+ *           AspectJAfterAdvice
+ *             MethodBeforeAdviceInterceptor 调用前置通知
+ *               调用目标方法
+ *           调用后置通知
+ *        返回或者异常方法
  *
  *
  *
