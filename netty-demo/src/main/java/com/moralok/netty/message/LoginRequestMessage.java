@@ -1,17 +1,25 @@
 package com.moralok.netty.message;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
+@Data
+
+@ToString
 public class LoginRequestMessage extends Message {
 
     private String username;
     private String password;
-    private String nickname;
+
+    public LoginRequestMessage() {
+    }
+
+    public LoginRequestMessage(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public int getMessageType() {

@@ -22,7 +22,7 @@ public class TestMessageCodec {
         EmbeddedChannel embeddedChannel = new EmbeddedChannel(
                 new LoggingHandler(LogLevel.DEBUG),
                 new MessageCodec());
-        LoginRequestMessage message = new LoginRequestMessage("zhangsan", "123", "张三");
+        LoginRequestMessage message = new LoginRequestMessage("zhangsan", "123");
         embeddedChannel.writeOutbound(message);
     }
 
@@ -35,7 +35,7 @@ public class TestMessageCodec {
                 new LengthFieldBasedFrameDecoder(1024, 12, 4, 0, 0),
                 new MessageCodec());
         ByteBuf buf = ByteBufAllocator.DEFAULT.buffer();
-        LoginRequestMessage message = new LoginRequestMessage("zhangsan", "123", "张三");
+        LoginRequestMessage message = new LoginRequestMessage("zhangsan", "123");
         MessageCodec messageCodec = new MessageCodec();
         Method method = MessageCodec.class.getDeclaredMethod("encode", ChannelHandlerContext.class, Message.class, ByteBuf.class);
         method.setAccessible(true);
