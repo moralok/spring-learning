@@ -38,6 +38,26 @@ public abstract class Message implements Serializable {
 
     private static final Map<Integer, Class<?>> messageClasses = new HashMap<>();
 
+    static {
+        messageClasses.put(LoginRequestMessage, LoginRequestMessage.class);
+        messageClasses.put(LoginResponseMessage, LoginResponseMessage.class);
+        messageClasses.put(ChatRequestMessage, ChatRequestMessage.class);
+        messageClasses.put(ChatResponseMessage, ChatResponseMessage.class);
+        messageClasses.put(GroupCreateRequestMessage, GroupCreateRequestMessage.class);
+        messageClasses.put(GroupCreateResponseMessage, GroupCreateResponseMessage.class);
+        messageClasses.put(GroupJoinRequestMessage, GroupJoinRequestMessage.class);
+        // messageClasses.put(GroupJoinResponseMessage, GroupJoinResponseMessage.class);
+        messageClasses.put(GroupQuitRequestMessage, GroupQuitRequestMessage.class);
+        // messageClasses.put(GroupQuitResponseMessage, GroupQuitResponseMessage.class);
+        messageClasses.put(GroupChatRequestMessage, GroupChatRequestMessage.class);
+        messageClasses.put(GroupChatResponseMessage, GroupChatResponseMessage.class);
+        messageClasses.put(GroupMembersRequestMessage, GroupMembersRequestMessage.class);
+        // messageClasses.put(GroupMembersResponseMessage, GroupMembersResponseMessage.class);
+        messageClasses.put(PingMessage, PingMessage.class);
+
+        messageClasses.put(PongMessage, PongMessage.class);
+
+    }
 
 
 }
