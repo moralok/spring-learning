@@ -28,6 +28,7 @@ public class BeanConfig {
 
     @Bean(value = "customName")
     public Person person() {
+        lisi();
         return new Person("wangwu", 30);
     }
 }

@@ -14,6 +14,7 @@ public class Person {
     }
 
     public Person(String name, Integer age) {
+        System.out.println("person created " + name + " " + age);
         this.name = name;
         this.age = age;
     }

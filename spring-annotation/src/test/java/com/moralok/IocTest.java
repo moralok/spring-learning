@@ -26,7 +26,7 @@ public class IocTest {
      */
     @Test
     public void xmlConfigTest() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("pure-beans.xml");
         Person zhangsan = (Person) ac.getBean("zhangsan");
         System.out.println(zhangsan);
     }
@@ -49,6 +49,15 @@ public class IocTest {
         for (String name : beanNamesForType) {
             System.out.println(name);
         }
+    }
+
+    @Test
+    public void annotationConfigWithComponentTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(BeanConfigWithComponent.class);
+        Person lisi1 = (Person) ac.getBean("lisi");
+        Person lisi2 = (Person) ac.getBean("lisi");
+        Person zhangsan = (Person) ac.getBean("zhangsan");
+        System.out.println(lisi1 == lisi2);
     }
 
     /**

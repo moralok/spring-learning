@@ -12,4 +12,10 @@ public class CircularReferenceTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("circular-reference-test.xml");
         CircularA circularA = (CircularA) applicationContext.getBean("circularA");
     }
+
+    @Test
+    public void testProxy() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("proxy-circular-reference-test.xml");
+        CircularA circularA = (CircularA) applicationContext.getBean("proxyCircularA");
+    }
 }
