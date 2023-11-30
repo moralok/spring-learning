@@ -1,0 +1,2 @@
+dog = com.moralok.dubbo.spi.test.Dog
+cat = com.moralok.dubbo.spi.test.Cat
