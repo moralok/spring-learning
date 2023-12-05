@@ -19,6 +19,6 @@ public class MyImportSelector implements ImportSelector {
      */
     @Override
     public String[] selectImports(AnnotationMetadata annotationMetadata) {
-        return new String[] {"com.moralok.bean.Blue", "com.moralok.bean.Yellow"};
+        return new String[] {"com.moralok.bean.Blue", "com.moralok.bean.Red"};
     }
 }

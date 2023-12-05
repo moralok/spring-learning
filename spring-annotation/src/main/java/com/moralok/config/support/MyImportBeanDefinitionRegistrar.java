@@ -1,6 +1,6 @@
 package com.moralok.config.support;
 
-import com.moralok.bean.Rainbow;
+import com.moralok.bean.Color;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -23,14 +23,14 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
      */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        // 如果时候来注册的怎么办呢，感觉还是需要关注和把控顺序呀
+        // 注意可感知的信息
         boolean hasRed = registry.containsBeanDefinition("com.moralok.bean.Red");
         boolean hasBlue = registry.containsBeanDefinition("com.moralok.bean.Blue");
         if (hasRed && hasBlue) {
             // 允许自定义BeanDefinition
-            BeanDefinition beanDefinition = new RootBeanDefinition(Rainbow.class);
+            BeanDefinition beanDefinition = new RootBeanDefinition(Color.class);
             // 可以自定义Bean的id
-            registry.registerBeanDefinition("rainbow", beanDefinition);
+            registry.registerBeanDefinition("color", beanDefinition);
         }
     }
 }
