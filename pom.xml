@@ -16,6 +16,7 @@
         <module>simple-web</module>
         <module>mybatis-original</module>
         <module>dubbo-spi-test</module>
+        <module>load-testing</module>
     </modules>
 
     <properties>
@@ -24,6 +25,10 @@
         <maven.compiler.target>8</maven.compiler.target>
         <encoding>UTF-8</encoding>
         <junit.version>5.9.3</junit.version>
+        <org.projectlombok.version>1.18.26</org.projectlombok.version>
+        <spring-boot.version>2.7.17</spring-boot.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <mysql-connector.version>8.0.33</mysql-connector.version>
     </properties>
 
     <dependencies>
@@ -31,6 +36,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -42,7 +53,19 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${org.projectlombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
 
 </project>

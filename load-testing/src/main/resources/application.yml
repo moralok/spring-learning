@@ -1,0 +1,18 @@
+server:
+  port: 10000
+  tomcat:
+    threads:
+      max: 200
+
+spring:
+  application:
+    name: load-testing
+  # 2.6 开始循环依赖默认被禁用
+  main:
+    allow-circular-references: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&autoReconnect=true&characterEncoding=utf8
